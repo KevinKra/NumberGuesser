@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Number Guesser</title>
+	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="normalize.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,700,800" rel="stylesheet">
+</head>
+<body>
+	<div class="header-container">
+		<header class="body-header">
+			<h1 class="header-title">NUMBER<span class="top-title">GUESSER</span></h1>
+			<hr><p>ULTIMATE CHALLENGER EDITION</p><hr>
+		</header>
+	</div>
+	<main>
+		<div class="main-flex">
+			<section class="guess-section">
+				<article class="set-range">
+					<div class="input-cont">
+						<h3>Set Range</h3>
+						<div class="input">
+							<div class="user-input m-right sm-form">
+								<label for="name">
+									<span>Min Range</span></br>
+									<input type="text" class="name" id="name" name="user_name">
+									<span class="error">beep</span>
+								</label>
+							</div>
+							<div class="user-input m-right sm-form">
+								<label for="name">
+									<span>Max Range</span></br>
+									<input type="text" id="name" name="user_name">
+									<span class="error">beep</span>
+								</label>
+							</div>
+							<button class="button">UPDATE</button>
+						</div>
+					</div>
+					<!-- <button class="button">UPDATE</button> -->
+				</article>
+				<article class="set-challengers">
+					<div class="challenger-cont">
+					<p>The Current Range is <span class="r-low">1</span> to <span class="r-high">100</span></p>
+					<section class="challenger">
+						<h3>Challenger 1</h3>
+						<div class="input">
+							<div class="user-input lg-form">
+								<label for="name">
+  									<span>Name</span></br>
+  									<input type="text" class="name" id="name" name="user_name">
+  									<span class="error">beep</span>
+								</label>
+							</div>
+							<div class="user-input sm-form">
+								<label for="name">
+  									<span>Guess</span></br>
+  									<input type="text" id="name" name="user_name">
+  									<span class="error">beep</span>
+								</label>
+							</div>
+						</div>
+					</section>
+					<section class="challenger">
+						<h3>Challenger 2</h3>
+						<div class="input">
+							<div class="user-input lg-form">
+								<label for="name">
+  									<span>Name</span></br>
+  									<input type="text" id="name" name="user_name">
+  									<span class="error">beep</span>
+								</label>
+							</div>
+							<div class="user-input sm-form">
+								<label for="name">
+  									<span>Guess</span></br>
+  									<input type="text" id="name" name="user_name">
+  									<span class="error">beep</span>
+								</label>
+							</div>
+						</div>
+					</section>
+					<section class="challenger-buttons">
+						<button class="submit button"><span>SUBMIT GUESS</span></button>
+						<button class="reset button"><span>RESET GAME</span></button>
+						<button class="clear button"><span>CLEAR GAME</span></button>
+					</section>
+					</div>
+				</article>
+				<article class="latest-score">
+					<div class="latest-cont">
+						<section class="ch-score line-right">
+							<h3>Challenger 1 Name</h3>
+							<p>current guess</p>
+							<span class="user1-guess number">0</span>
+							<span class="approx-result">that's too high</span>
+						</section>
+						<hr class="vertical-line">
+						<section class="ch-score">
+							<h3>Challenger 2 Name</h3>
+							<p>current guess</p>
+							<span class="user2-guess number">0</span>
+							<span class="approx-result">that's too high</span>
+						</section>
+					</div>
+				</article>
+			</section>
+			<section class="results-section">
+				<article class="result">
+					<header class="flex-row">
+						<span class="user1">CHALLENGER 1 NAME</span>
+						<p>vs</p>
+						<span class="user2">CHALLENGER 2 NAME</span>
+					</header>
+					<hr class="horizontal-line">
+					<article class="winner">
+						<h1 class="result-winner">CHALLENGER 2 NAME</h1>
+						<p>WINNER</p>
+					</article>
+					<hr class="horizontal-line">
+					<footer class="flex-row result-metrics">
+						<section>
+							<span class="num-guesses">25</span>
+							<span class="metric">GUESSES</span>
+						</section>
+						<section>
+							<span class="num-time">3.5</span>
+							<span class="metric">MINUTES</span>
+						</section>
+						<button class="close">X</button>
+					</footer>
+				</article>
+			</section>
+		</div>
+	</main>
+</body>
+</html>
