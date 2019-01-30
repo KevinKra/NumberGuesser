@@ -1,0 +1,181 @@
+*:before, *:after, * {
+	box-sizing: border-box;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	font-family: "Open Sans", sans-serif;
+}
+
+main {
+	height: 100vh;
+}
+
+/*
+#DD1972
+#F7F7F7
+#404041
+
+#6E6E6E
+#D0D2D3
+#F74D9B
+*/
+
+
+/*====== GLOBAL LAYOUT ======*/
+.flex-document {
+	display: flex;
+	width: 100%;
+	height: 100%;
+}
+
+.header-section {
+	background-color: #DD1972;
+	height: 100%;
+}
+
+.input-section {
+	width: 50%;
+	background-color: #F7F7F7;
+}
+
+.output-section {
+	width: 50%;
+	background-color: #6E6E6E;
+}
+
+/*====== MODULAR RULES ======*/
+.article-box {
+	background-color: #FFF;
+	border: 2px solid #D0D2D3;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin: .8rem;
+/*	width: 525px;*/
+	padding: .8rem;
+}
+
+.btn {
+	background-color: #D0D2D3;
+	border: none;
+	color: #FFF;
+	border-radius: 50px;
+	font-size: 16px;
+	max-height: 32px;
+	padding: .4rem 1.2rem;
+	margin: 0 .5rem;
+	margin: auto;
+}
+
+.btn:hover {
+	background-color: #6E6E6E;
+}
+
+.input {
+	font-size: 18px;
+	padding: .3rem 0;
+	width: 100%;
+	margin: .2rem 0;
+}
+
+.input:focus {
+	border: 2px solid #F74D9B;
+	outline: none;
+}
+
+.sm-input {	
+	max-width: 200px;
+	min-width: 75px;
+}
+
+.md-input {
+	margin-right: 1rem;
+	max-width: 400px;
+	min-width: 350px;
+	padding-bottom: .5rem;
+}
+
+/*.sm-input span, .md-input span {
+	border: 1px solid red;
+	
+}*/
+
+.content-container {
+	max-width: 550px;
+	width: 100%;
+}
+
+.content-container h3 {
+	margin: 0 0 .5rem 0;
+	padding: 0;
+}
+
+.input-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	width: 100%;
+}
+
+.vertical-line {
+    background-color: #D0D2D3;
+    border: none;
+    height: 23vh;
+    width: 2px;     	
+}
+
+/*====== HEADER LAYOUT ======*/
+.header-section h1 {
+	margin: 0;
+}
+
+
+/*====== RANGE LAYOUT ======*/
+
+
+
+/*====== CHALLENGER LAYOUT ======*/
+.challenger-rules {
+	align-items: center;
+	display: flex;
+	margin: 0 auto;
+	width: 400px;
+}
+
+.challenger-btns {
+	display: flex;
+	justify-content: space-around;
+	max-width: 550px;
+	width: 100%;
+}
+
+.challenger-rules section {
+
+}
+
+.challenger-rules hr {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
