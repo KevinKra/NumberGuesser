@@ -17,6 +17,12 @@ let ch2CurGuess = document.querySelector('.ch-2-cur-guess');
 let ch1NameOutput = document.querySelectorAll('.ch1-name-output')
 let ch2NameOutput = document.querySelectorAll('.ch2-name-output')
 
+
+/*=== Error Queries ====*/
+let errorInputName = document.querySelectorAll('.error')
+let errorInputNumb = document.querySelectorAll('.error-2')
+
+
 /* ==== BUTTONS ==== */
 let btnUpdate = document.querySelector('.update-btn');
 let btnSubmit = document.querySelector('.submit-btn');
@@ -36,10 +42,6 @@ btnSubmit.addEventListener('click', function() {
 	updateAll(ch2NameInput, ch2NameOutput);
 });
 
-// updateAll(ch1NameInput, ch1NameOutput);
-
-// updateAll('p', 'A+');
-
 function updateAll(query, output) {
  	let qValue = query.value;
 	return changeContent(qValue, output);
@@ -48,4 +50,40 @@ function updateAll(query, output) {
 function changeContent(input, output) {
 	let changeHTML = element => element.innerHTML = input;
 	output.forEach(changeHTML);
-} 
+}
+
+//
+ 
+		// errorInputName.style.color = 'red';
+		// errorInputNumb.style.color = 'red';
+
+checkInput(ch1NameInput, ch1Guess);
+
+function checkInput(...inputs) {
+	let inputArray = inputs;
+	typeof(inputArray);
+	console.log(inputArray)
+	if (inputs.value === "") {
+
+		errorInputName.style.color = 'red';
+		errorInputNumb.style.color = 'red';
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
