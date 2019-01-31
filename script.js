@@ -42,35 +42,70 @@ btnSubmit.addEventListener('click', function() {
 	updateAll(ch2NameInput, ch2NameOutput);
 });
 
+
+updateColorRed(errorInputName, errorInputNumb, ch1NameOutput)
+
+
+// updateVisibility(errorInputName);
+
+
+
+// ==== FUNCTIONALITY ==== //
+
+//target specific outputs with specific inputs
 function updateAll(query, output) {
  	let qValue = query.value;
 	return changeContent(qValue, output);
 }
-
 function changeContent(input, output) {
 	let changeHTML = element => element.innerHTML = input;
 	output.forEach(changeHTML);
 }
 
-//
- 
-		// errorInputName.style.color = 'red';
-		// errorInputNumb.style.color = 'red';
 
-checkInput(ch1NameInput, ch1Guess);
+let visibilityHidden = (element) => {element.style.visibility = 'hidden'};
+let visibilityShow = (element) => {element.style.visibility = 'visible'};
 
-function checkInput(...inputs) {
-	let inputArray = inputs;
-	typeof(inputArray);
-	console.log(inputArray)
-	if (inputs.value === "") {
 
-		errorInputName.style.color = 'red';
-		errorInputNumb.style.color = 'red';
-	}
+
+
+// checkForInput(minRange,maxRange,ch1NameInput,ch2NameInput,ch1Guess,ch2Guess)
+
+// function checkForInput(...inputs) {
+// 	inputs.forEach()
+
+// 	function inputChecker() {
+// 	if (inputs.value.length == 0 ) {
+// 		console.log('sort of working')
+// 	} else {
+// 		console.log('nope');
+// 	}
+// }
+
+
+
+
+//HOFs
+//modify n arguments including nodeLists --currently changes visibility to hidden
+function updateVisibility(...inputs) {
+	//array of Nodelists
+	let visibilityHidden = (element) => {element.style.visibility = 'hidden'};
+	return inputs.map(element => element.forEach(visibilityHidden));
+}
+
+//modify n arguments including nodeLists --currently changes colors to red
+function updateColorRed(...inputs) {
+	//array of Nodelists
+	let changeColor = (element) => {element.style.color = 'blue'}
+	return inputs.map(element => element.forEach(changeColor));
 }
 
 
+
+
+//change non-forms to forms in HTML
+//convert nodeLists to Arrays and then forEach the new arrays
+//arrow function w/o {} implicitly returns, with {} needs return keyword
 
 
 
