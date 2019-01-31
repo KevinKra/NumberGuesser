@@ -3,136 +3,141 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Number Guesser</title>
-	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="styles2.css">
 	<link rel="stylesheet" href="normalize.css">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,700,800" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800" rel="stylesheet">
 </head>
 <body>
-	<div class="header-container">
-		<header class="body-header">
-			<h1 class="header-title">NUMBER<span class="top-title">GUESSER</span></h1>
+	<header class="header-section">
+		<article class="header-article">
+			<h1 class="header-title">NUMBER<span class="header-span">GUESSER</span></h1>
 			<hr><p>ULTIMATE CHALLENGER EDITION</p><hr>
-		</header>
-	</div>
+		</article>
+	</header>
 	<main>
-		<div class="main-flex">
-			<section class="guess-section">
-				<article class="set-range">
-					<div class="input-cont">
+		<div class="flex-document">
+			<section class="input-section">
+				<article class="article-box">
+					<div class="content-container">
 						<h3>Set Range</h3>
-						<div class="input">
-							<div class="user-input m-right sm-form">
+						<div class="input-container">
+							<section class="sm-input">
 								<label for="name">
 									<span>Min Range</span></br>
-									<input type="text" class="name" id="name" name="user_name">
+									<input class="min-range input" type="text" id="name" name="user_name">
 									<span class="error">beep</span>
 								</label>
-							</div>
-							<div class="user-input m-right sm-form">
+							</section>
+							<section class="sm-input">
 								<label for="name">
 									<span>Max Range</span></br>
-									<input type="text" id="name" name="user_name">
+									<input class="max-range input" type="text" id="name" name="user_name">
 									<span class="error">beep</span>
 								</label>
-							</div>
-							<button class="button">UPDATE</button>
+							</section>
+							<button class="update-btn btn">UPDATE</button>
 						</div>
 					</div>
-					<!-- <button class="button">UPDATE</button> -->
 				</article>
-				<article class="set-challengers">
-					<div class="challenger-cont">
-					<p>The Current Range is <span class="r-low">1</span> to <span class="r-high">100</span></p>
-					<section class="challenger">
+				<article class="article-box range-box">
+					<section class="content-container">
+						<p>The Current Range is <span class="r-low bold">1</span> to <span class="r-high bold">100</span></p>
+					</section>
+					<section class="content-container">
 						<h3>Challenger 1</h3>
-						<div class="input">
-							<div class="user-input lg-form">
+						<div class="input-container">
+							<section class="md-input">
 								<label for="name">
   									<span>Name</span></br>
-  									<input type="text" class="name" id="name" name="user_name">
+  									<input class="ch-1-name input" type="text" id="name" name="user_name">
   									<span class="error">beep</span>
 								</label>
-							</div>
-							<div class="user-input sm-form">
+							</section>
+							<section class="sm-input">
 								<label for="name">
   									<span>Guess</span></br>
-  									<input type="text" id="name" name="user_name">
-  									<span class="error">beep</span>
+  									<input class="ch-1-guess input" type="text" id="name" name="user_name">
+  									<span class="error2">beep</span>
 								</label>
-							</div>
+							</section>
 						</div>
 					</section>
-					<section class="challenger">
+					<section class="content-container">
 						<h3>Challenger 2</h3>
-						<div class="input">
-							<div class="user-input lg-form">
+						<div class="input-container">
+							<section class="md-input">
 								<label for="name">
   									<span>Name</span></br>
-  									<input type="text" id="name" name="user_name">
+  									<input class="ch-2-name input" type="text" id="name" name="user_name">
   									<span class="error">beep</span>
 								</label>
-							</div>
-							<div class="user-input sm-form">
+							</section>
+							<section class="sm-input">
 								<label for="name">
   									<span>Guess</span></br>
-  									<input type="text" id="name" name="user_name">
-  									<span class="error">beep</span>
+  									<input class="ch-2-guess input" type="text" id="name" name="user_name">
+  									<span class="error-2">beep</span>
 								</label>
-							</div>
+							</section>
 						</div>
 					</section>
-					<section class="challenger-buttons">
-						<button class="submit button"><span>SUBMIT GUESS</span></button>
-						<button class="reset button"><span>RESET GAME</span></button>
-						<button class="clear button"><span>CLEAR GAME</span></button>
+					<section class="challenger-btns">
+						<button class="btn submit-btn"><span>SUBMIT GUESS</span></button>
+						<button class="btn reset-btn"><span>RESET GAME</span></button>
+						<button class="btn clear-btn"><span>CLEAR GAME</span></button>
 					</section>
-					</div>
 				</article>
-				<article class="latest-score">
-					<div class="latest-cont">
-						<section class="ch-score line-right">
-							<h3>Challenger 1 Name</h3>
-							<p>current guess</p>
-							<span class="user1-guess number">0</span>
-							<span class="approx-result">that's too high</span>
-						</section>
-						<hr class="vertical-line">
-						<section class="ch-score">
-							<h3>Challenger 2 Name</h3>
-							<p>current guess</p>
-							<span class="user2-guess number">0</span>
-							<span class="approx-result">that's too high</span>
-						</section>
-					</div>
+				<article class="article-box" id="guess-cont">
+					<section class="content-container">
+						<h3 class="chall-title">Latest Score</h3>
+						<div class="challenger-rules">
+							<section class="chall-latest">
+								<h4 class="ch1-name-output">Challenger 1 Name</h4>
+								<span>current guess</span>
+								<span class="lg-number ch-1-cur-guess">97</span>
+								<span class="chall-approx">that's too high</span>
+							</section>
+							<hr class="vertical-line">
+							<section class="chall-latest">
+								<h4 class="ch2-name-output">Challenger 2 Name</h4>
+								<span>current guess</span>
+								<span class="lg-number ch-2-cur-guess">3</span>
+								<span class="chall-approx">that's too high</span>
+							</section>
+						</div>
+					</section>
 				</article>
 			</section>
-			<section class="results-section">
-				<article class="result">
-					<header class="flex-row">
-						<span class="user1">CHALLENGER 1 NAME</span>
-						<p>vs</p>
-						<span class="user2">CHALLENGER 2 NAME</span>
+			<section class="output-section">
+				<article class="output-card">
+					<header class="">
+						<span class="bold ch1-name-output">CHALLENGER 1 NAME</span>
+						<span class="thin">vs</span>
+						<span class="bold ch2-name-output">CHALLENGER 2 NAME</span>
 					</header>
-					<hr class="horizontal-line">
-					<article class="winner">
-						<h1 class="result-winner">CHALLENGER 2 NAME</h1>
+					<hr class="">
+					<article class="output-center">
+						<h1 class="">CHALLENGER 2 NAME</h1>
 						<p>WINNER</p>
 					</article>
-					<hr class="horizontal-line">
-					<footer class="flex-row result-metrics">
-						<section>
-							<span class="num-guesses">25</span>
-							<span class="metric">GUESSES</span>
+					<hr class="">
+					<footer class="">
+						<section class="output-metrics">
+							<section>
+								<span class="bold">25</span>
+								<span class="thin">GUESSES</span>
+							</section>
+							<section>
+								<span class="bold">3.5</span>
+								<span class="thin">MINUTES</span>
+							</section>
 						</section>
-						<section>
-							<span class="num-time">3.5</span>
-							<span class="metric">MINUTES</span>
-						</section>
-						<button class="close">X</button>
+						<button class="btn-x">X</button>
 					</footer>
 				</article>
 			</section>
 		</div>
 	</main>
 </body>
+<script src="script.js"></script>
 </html>

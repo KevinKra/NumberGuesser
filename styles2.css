@@ -1,0 +1,330 @@
+*:before, *:after, * {
+	box-sizing: border-box;
+}
+
+html {
+	height: 100vh;
+}
+
+
+body {
+	padding: 0;
+	margin: 0;
+	font-family: "Open Sans", sans-serif;
+	min-height: 100vh;
+}
+
+main {
+}
+
+/*
+#DD1972
+#F7F7F7
+#404041
+
+#6E6E6E
+#D0D2D3
+#F74D9B
+*/
+
+
+/*====== GLOBAL LAYOUT ======*/
+.flex-document {
+	display: flex;
+	/*min-height: 100vh;*/
+}
+
+.header-section {
+	background-color: #404041;
+	height: 100%;
+}
+
+.input-section {
+	width: 50%;
+	background-color: #F7F7F7;
+	border-right: 2px solid #6E6E6E;
+}
+
+.output-section {
+	width: 50%;
+	background-color: #D0D2D3;
+}
+
+.input-section, .output-section {
+	color: #6E6E6E;
+}
+
+.bold {
+	font-weight: 800;
+}
+
+.thin {
+	font-weight: 300;
+}
+
+/*====== MODULAR RULES ======*/
+.article-box {
+	background-color: #FFF;
+	border: 2px solid #D0D2D3;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin: .8rem;
+	padding: .4rem .8rem .8rem .8rem;
+}
+
+.article-box h3 {
+	font-weight: 800;
+	color: #404041;
+}
+
+.article-box span {
+	font-weight: 300;
+}
+
+.article-box button, .challenger-btns button span {
+	font-weight: 600;
+}
+
+.output-card {
+	background-color: #FFF;
+	border: 2px solid #6E6E6E;
+	margin: .8rem;
+	padding: .4rem .8rem .8rem .8rem;
+}
+
+.btn {
+	background-color: #D0D2D3;
+	border: none;
+	color: #FFF;
+	border-radius: 50px;
+	font-size: 16px;
+	max-height: 32px;
+	padding: .4rem 1.4rem;
+	margin: auto 0;
+}
+
+.btn:hover {
+	background-color: #DD1972;
+}
+
+.btn:focus {
+	outline: none;
+}
+
+.btn-x {
+	background-color: #D0D2D3;
+	border: none;
+	color: #FFF;
+	border-radius: 50%;
+	font-size: 16px;
+	height: 30px;
+	width: 30px;
+}
+
+.input {
+	font-size: 20px;
+	padding: .3rem 0;
+	width: 100%;
+	margin: .2rem 0;
+	border: 2px solid #D0D2D3;
+}
+
+.input:focus {
+	border: 2px solid #F74D9B;
+	outline: none;
+}
+
+.sm-input {	
+	width: 175px;
+}
+
+.md-input {
+	margin-right: .7rem;
+	width: 69%;
+	padding-bottom: .5rem;
+}
+
+.content-container {
+	max-width: 550px;
+	width: 100%;
+	margin: 0 0 .4rem 0;
+}
+
+.content-container h3 {
+	margin: 0;
+	padding: 0;
+}
+
+.input-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	width: 100%;
+}
+
+.vertical-line {
+	height: 200px;
+	display: inline;
+	width: 2px;
+	background-color: lightgrey;
+	border-style: none;
+	position: absolute;
+	margin: 0;
+}
+
+/*====== HEADER LAYOUT ======*/
+.header-article {
+	text-align: center;
+	margin: 0 auto;
+	padding: 1rem 0 1.8rem 0;
+	width: 490px;
+}
+
+.header-article > h1 {
+	font-size: 55px;
+	color: #DD1972;
+	padding: 0;
+	margin: 0;
+	letter-spacing: 0px;
+}
+
+.header-article > p {
+	display: inline;
+	color: #FFF;
+	font-weight: 100;
+	font-size: 18px;
+	margin: 0;
+}
+
+.header-article hr {
+	margin:5px 5px;
+	width: 19%;
+	display: inline-block;
+}
+
+.header-span {
+	font-weight: 100;
+}
+
+
+/*====== RANGE LAYOUT ======*/
+.input-container .sm-input {
+	margin-right: .6rem;
+}
+
+.range-box > .content-container:first-child p {
+	margin: 0 0 1rem 0;
+	padding: 0;
+}
+
+.range-box .content-container .bold {
+	font-weight: 700;
+	text-decoration: underline;
+	color:#404041;
+}
+
+
+/*====== CHALLENGER LAYOUT ======*/
+.challenger-rules {
+	align-items: center;
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+}
+
+.challenger-btns {
+	display: flex;
+	justify-content: space-between;
+	max-width: 520px;
+	width: 95%;
+	min-width: 450px;
+}
+
+.challenger-btns button:nth-child(2) {
+	margin: 0 .5rem;
+}
+
+.challenger-rules section {
+	padding: 0;
+	margin: .5rem;
+}
+
+.challenger-rules h4 {
+	font-weight: 600;
+	margin: 0;
+}
+
+.challenger-rules .lg-number {
+	font-size: 82px;
+	font-weight: 800;
+	color: #F74D9B;
+}
+
+#guess-cont {
+	height: 225px;
+}
+
+.chall-latest {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.chall-approx {
+	font-size: 1.3rem;
+}
+
+
+/*====== OUTPUT LAYOUT ======*/
+.output-card header, footer {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.output-center {
+	margin: 1rem 0;
+	display: relative;
+}
+
+.output-card article {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.output-card footer {
+	justify-content: space-between;
+}
+
+.output-card p {
+	font-size: 36px;
+	margin: 0;
+	font-weight: 300;
+}
+
+.output-card h1 {
+	margin: 0;
+}
+
+.output-metrics {
+	display: flex;
+	justify-content: space-between;
+	width: 58%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
