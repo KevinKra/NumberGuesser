@@ -5,12 +5,12 @@
 	<title>Number Guesser</title>
 	<link rel="stylesheet" href="styles2.css">
 	<link rel="stylesheet" href="normalize.css">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,700,800" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800" rel="stylesheet">
 </head>
 <body>
 	<header class="header-section">
 		<article class="header-article">
-			<h1 class="header-title">NUMBER<span class="top-title">GUESSER</span></h1>
+			<h1 class="header-title">NUMBER<span class="header-span">GUESSER</span></h1>
 			<hr><p>ULTIMATE CHALLENGER EDITION</p><hr>
 		</article>
 	</header>
@@ -24,24 +24,24 @@
 							<section class="sm-input">
 								<label for="name">
 									<span>Min Range</span></br>
-									<input class="input" type="text" id="name" name="user_name">
+									<input class="min-range input" type="text" id="name" name="user_name">
 									<span class="error">beep</span>
 								</label>
 							</section>
 							<section class="sm-input">
 								<label for="name">
 									<span>Max Range</span></br>
-									<input class="input" type="text" id="name" name="user_name">
+									<input class="max-range input" type="text" id="name" name="user_name">
 									<span class="error">beep</span>
 								</label>
 							</section>
-							<button class="btn">UPDATE</button>
+							<button class="update-btn btn">UPDATE</button>
 						</div>
 					</div>
 				</article>
 				<article class="article-box range-box">
 					<section class="content-container">
-						<p>The Current Range is <span class="r-low">1</span> to <span class="r-high">100</span></p>
+						<p>The Current Range is <span class="r-low bold">1</span> to <span class="r-high bold">100</span></p>
 					</section>
 					<section class="content-container">
 						<h3>Challenger 1</h3>
@@ -49,14 +49,14 @@
 							<section class="md-input">
 								<label for="name">
   									<span>Name</span></br>
-  									<input class="input" type="text" id="name" name="user_name">
+  									<input class="ch-1-name input" type="text" id="name" name="user_name">
   									<span class="error">beep</span>
 								</label>
 							</section>
 							<section class="sm-input">
 								<label for="name">
   									<span>Guess</span></br>
-  									<input class="input" type="text" id="name" name="user_name">
+  									<input class="ch-1-guess input" type="text" id="name" name="user_name">
   									<span class="error">beep</span>
 								</label>
 							</section>
@@ -68,72 +68,76 @@
 							<section class="md-input">
 								<label for="name">
   									<span>Name</span></br>
-  									<input class="input" type="text" id="name" name="user_name">
+  									<input class="ch-2-name input" type="text" id="name" name="user_name">
   									<span class="error">beep</span>
 								</label>
 							</section>
 							<section class="sm-input">
 								<label for="name">
   									<span>Guess</span></br>
-  									<input class="input" type="text" id="name" name="user_name">
+  									<input class="ch-2-guess input" type="text" id="name" name="user_name">
   									<span class="error">beep</span>
 								</label>
 							</section>
 						</div>
 					</section>
 					<section class="challenger-btns">
-						<button class="btn"><span>SUBMIT GUESS</span></button>
-						<button class="btn"><span>RESET GAME</span></button>
-						<button class="btn"><span>CLEAR GAME</span></button>
+						<button class="btn submit-btn"><span>SUBMIT GUESS</span></button>
+						<button class="btn reset-btn"><span>RESET GAME</span></button>
+						<button class="btn clear-btn"><span>CLEAR GAME</span></button>
 					</section>
 				</article>
-				<article class="article-box">
+				<article class="article-box" id="guess-cont">
 					<section class="content-container">
+						<h3 class="chall-title">Latest Score</h3>
 						<div class="challenger-rules">
-							<section class="">
-								<h3>Challenger 1 Name</h3>
-								<p>current guess</p>
-								<span class="">0</span>
-								<span class="">that's too high</span>
+							<section class="chall-latest">
+								<h4 class="ch1-name-output">Challenger 1 Name</h4>
+								<span>current guess</span>
+								<span class="lg-number ch-1-cur-guess">97</span>
+								<span class="chall-approx">that's too high</span>
 							</section>
 							<hr class="vertical-line">
-							<section class="ch-score">
-								<h3>Challenger 2 Name</h3>
-								<p>current guess</p>
-								<span class="">0</span>
-								<span class="">that's too high</span>
+							<section class="chall-latest">
+								<h4 class="ch2-name-output">Challenger 2 Name</h4>
+								<span>current guess</span>
+								<span class="lg-number ch-2-cur-guess">3</span>
+								<span class="chall-approx">that's too high</span>
 							</section>
 						</div>
 					</section>
 				</article>
 			</section>
 			<section class="output-section">
-				<article class="">
+				<article class="output-card">
 					<header class="">
-						<span class="">CHALLENGER 1 NAME</span>
-						<p>vs</p>
-						<span class="">CHALLENGER 2 NAME</span>
+						<span class="bold ch1-name-output">CHALLENGER 1 NAME</span>
+						<span class="thin">vs</span>
+						<span class="bold ch2-name-output">CHALLENGER 2 NAME</span>
 					</header>
 					<hr class="">
-					<article class="">
+					<article class="output-center">
 						<h1 class="">CHALLENGER 2 NAME</h1>
 						<p>WINNER</p>
 					</article>
 					<hr class="">
 					<footer class="">
-						<section>
-							<span class="">25</span>
-							<span class="">GUESSES</span>
+						<section class="output-metrics">
+							<section>
+								<span class="bold">25</span>
+								<span class="thin">GUESSES</span>
+							</section>
+							<section>
+								<span class="bold">3.5</span>
+								<span class="thin">MINUTES</span>
+							</section>
 						</section>
-						<section>
-							<span class="">3.5</span>
-							<span class="">MINUTES</span>
-						</section>
-						<button class="">X</button>
+						<button class="btn-x">X</button>
 					</footer>
 				</article>
 			</section>
 		</div>
 	</main>
 </body>
+<script src="script.js"></script>
 </html>
