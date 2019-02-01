@@ -31,23 +31,24 @@ let btnClear = document.querySelector('.clear-btn');
 
 
 btnUpdate.addEventListener('click', function() {
-	// if () {};
-	rangeLow.innerText = minRange.value;
-	rangeHigh.innerText = maxRange.value;
+	checkForNumbers();
+
+	function checkForNumbers() {
+		if ( (minRange.value.length > 0 && maxRange.value.length > 0) && ( parseInt(minRange.value) < parseInt(maxRange.value) ) ) {
+			rangeLow.innerText = minRange.value;
+			rangeHigh.innerText = maxRange.value;
+			return generateRandomNum(minRange.value, maxRange.value);
+		} else {
+			console.log('false');
+			console.log(minRange.value)
+			console.log(maxRange.value)
+		}
+	}
 });
 
-// btnSubmit.addEventListener('click', function() {
-// 	ch1CurGuess.innerText = ch1Guess.value;
-// 	ch2CurGuess.innerText = ch2Guess.value;
-// 	updateAll(ch1NameInput, ch1NameOutput);
-// 	updateAll(ch2NameInput, ch2NameOutput);
-// });
-
-
-
 btnSubmit.addEventListener('click', function() {
-	checkForNames()
-	checkForNumbers()
+	checkForNames();
+	checkForNumbers();
 
 	function checkForNumbers() {
 		if ( ch1Guess.value.length > 0 && ch2Guess.value.length > 0 ) {
@@ -62,15 +63,20 @@ btnSubmit.addEventListener('click', function() {
 		let invalidName = /[^a-z0-9]+/gi;
 		if ((invalidName.test(ch1NameInput.value) || (ch1NameInput.value.length < 1) 
 			|| (invalidName.test(ch2NameInput.value) || (ch2NameInput.value.length < 1)))) {
-			console.log('name is invalid')
+			console.log('name is invalid');
 		} else {
 			updateAll(ch1NameInput, ch1NameOutput);
 			updateAll(ch2NameInput, ch2NameOutput);
-			console.log('name is valid')
+			console.log('name is valid');
 		}
 	}
 });
 
+
+function generateRandomNum(minRange, maxRange) {
+	let randomNum = Math.floor((Math.random() * maxRange) + minRange) +1;
+	console.log(randomNum)
+}
 
 // updateColorRed(errorInputName, errorInputNumb, ch1NameOutput)
 // updateVisibility(errorInputName);
