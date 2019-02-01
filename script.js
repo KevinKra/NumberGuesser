@@ -31,21 +31,47 @@ let btnClear = document.querySelector('.clear-btn');
 
 
 btnUpdate.addEventListener('click', function() {
+	// if () {};
 	rangeLow.innerText = minRange.value;
 	rangeHigh.innerText = maxRange.value;
 });
 
+// btnSubmit.addEventListener('click', function() {
+// 	ch1CurGuess.innerText = ch1Guess.value;
+// 	ch2CurGuess.innerText = ch2Guess.value;
+// 	updateAll(ch1NameInput, ch1NameOutput);
+// 	updateAll(ch2NameInput, ch2NameOutput);
+// });
+
+function checkInputs() {
+	if ( ch1Guess.value.length > 0 && ch2Guess.value.length > 0 ) {
+		ch1CurGuess.innerText = ch1Guess.value;
+		ch2CurGuess.innerText = ch2Guess.value;
+	} else {
+		console.log('false');
+	}	
+}
+
+
 btnSubmit.addEventListener('click', function() {
-	ch1CurGuess.innerText = ch1Guess.value;
-	ch2CurGuess.innerText = ch2Guess.value;
+	if ( ch1Guess.value.length > 0 && ch2Guess.value.length > 0 ) {
+		ch1CurGuess.innerText = ch1Guess.value;
+		ch2CurGuess.innerText = ch2Guess.value;
+	} else {
+		console.log('false');
+	}
 	updateAll(ch1NameInput, ch1NameOutput);
 	updateAll(ch2NameInput, ch2NameOutput);
 });
 
+let validName = /[a-z0-9]+/gi;
+if (validName.test(ch1Guess.value)) {
+	console.log('name is valid')
+} else {
+	console.log('name is invalid')
+}
 
-updateColorRed(errorInputName, errorInputNumb, ch1NameOutput)
-
-
+// updateColorRed(errorInputName, errorInputNumb, ch1NameOutput)
 // updateVisibility(errorInputName);
 
 
@@ -63,43 +89,73 @@ function changeContent(input, output) {
 }
 
 
-let visibilityHidden = (element) => {element.style.visibility = 'hidden'};
-let visibilityShow = (element) => {element.style.visibility = 'visible'};
 
 
 
 
-// checkForInput(minRange,maxRange,ch1NameInput,ch2NameInput,ch1Guess,ch2Guess)
 
-// function checkForInput(...inputs) {
-// 	inputs.forEach()
 
-// 	function inputChecker() {
-// 	if (inputs.value.length == 0 ) {
-// 		console.log('sort of working')
-// 	} else {
-// 		console.log('nope');
-// 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// let visibilityHidden = (element) => {element.style.visibility = 'hidden'};
+// let visibilityShow = (element) => {element.style.visibility = 'visible'};
+
+
+// //HOFs
+// //modify n arguments including nodeLists --currently changes visibility to hidden
+// function updateVisibility(...inputs) {
+// 	//array of Nodelists
+// 	let visibilityHidden = (element) => {element.style.visibility = 'hidden'};
+// 	return inputs.map(element => element.forEach(visibilityHidden));
 // }
 
+// //modify n arguments including nodeLists --currently changes colors to red
+// // function updateColorRed(...inputs) {
+// // 	//array of Nodelists
+// // 	let changeColor = (element) => {element.style.color = 'blue'}
+// // 	return inputs.map(element => element.forEach(changeColor));
+// // }
 
+// toArray(errorInputName, errorInputNumb, ch1NameOutput)
 
-
-//HOFs
-//modify n arguments including nodeLists --currently changes visibility to hidden
-function updateVisibility(...inputs) {
-	//array of Nodelists
-	let visibilityHidden = (element) => {element.style.visibility = 'hidden'};
-	return inputs.map(element => element.forEach(visibilityHidden));
-}
-
-//modify n arguments including nodeLists --currently changes colors to red
-function updateColorRed(...inputs) {
-	//array of Nodelists
-	let changeColor = (element) => {element.style.color = 'blue'}
-	return inputs.map(element => element.forEach(changeColor));
-}
-
+// function toArray(...inputs) {
+// 	//array of Nodelists
+// 	let convertToArr = (element) => {Array.from(element)}
+// 	let inputArr = inputs.map(convertToArr);
+// 	console.log(inputArr);
+// }
 
 
 

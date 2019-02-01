@@ -17,6 +17,14 @@ body {
 main {
 }
 
+
+/* turn off number spinners */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
 /*
 #DD1972
 #F7F7F7
@@ -61,6 +69,18 @@ main {
 .thin {
 	font-weight: 300;
 }
+
+/*====== JS FUNCTIONALITY ======*/
+.hidden {
+	visibility: hidden;
+}
+
+.show {
+	visibility: visible;
+}
+
+
+
 
 /*====== MODULAR RULES ======*/
 .article-box {
