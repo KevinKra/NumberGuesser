@@ -43,33 +43,34 @@ btnUpdate.addEventListener('click', function() {
 // 	updateAll(ch2NameInput, ch2NameOutput);
 // });
 
-function checkInputs() {
-	if ( ch1Guess.value.length > 0 && ch2Guess.value.length > 0 ) {
-		ch1CurGuess.innerText = ch1Guess.value;
-		ch2CurGuess.innerText = ch2Guess.value;
-	} else {
-		console.log('false');
-	}	
-}
 
 
 btnSubmit.addEventListener('click', function() {
-	if ( ch1Guess.value.length > 0 && ch2Guess.value.length > 0 ) {
-		ch1CurGuess.innerText = ch1Guess.value;
-		ch2CurGuess.innerText = ch2Guess.value;
-	} else {
-		console.log('false');
+	checkForNames()
+	checkForNumbers()
+
+	function checkForNumbers() {
+		if ( ch1Guess.value.length > 0 && ch2Guess.value.length > 0 ) {
+			ch1CurGuess.innerText = ch1Guess.value;
+			ch2CurGuess.innerText = ch2Guess.value;
+		} else {
+			console.log('false');
+		}
 	}
-	updateAll(ch1NameInput, ch1NameOutput);
-	updateAll(ch2NameInput, ch2NameOutput);
+
+	function checkForNames() {
+		let invalidName = /[^a-z0-9]+/gi;
+		if ((invalidName.test(ch1NameInput.value) || (ch1NameInput.value.length < 1) 
+			|| (invalidName.test(ch2NameInput.value) || (ch2NameInput.value.length < 1)))) {
+			console.log('name is invalid')
+		} else {
+			updateAll(ch1NameInput, ch1NameOutput);
+			updateAll(ch2NameInput, ch2NameOutput);
+			console.log('name is valid')
+		}
+	}
 });
 
-let validName = /[a-z0-9]+/gi;
-if (validName.test(ch1Guess.value)) {
-	console.log('name is valid')
-} else {
-	console.log('name is invalid')
-}
 
 // updateColorRed(errorInputName, errorInputNumb, ch1NameOutput)
 // updateVisibility(errorInputName);
