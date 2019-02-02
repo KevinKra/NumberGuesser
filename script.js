@@ -34,11 +34,15 @@ let btnClear = document.querySelector('.clear-btn');
 
 
 btnClear.addEventListener('click', function() {
+	clearTheInputs();
+	revertAllOutputs();
+	trueDisableON();
 	function clearTheInputs() {
 		function checkInputs() {
 			if (minRange.value.length > 0 || maxRange.value.length > 0 || ch1NameInput.value.length > 0 || ch2NameInput.value.length > 0 || 
 				ch1Guess.value.length > 0 || ch2Guess.value.length > 0) {
 				emptyTheInput(allInputs);
+				// btnClear.classList.remove("btn-active");
 				console.log(trueRandomNumber);
 			} else {
 				console.log('CLEAR INVALID');
@@ -46,29 +50,19 @@ btnClear.addEventListener('click', function() {
 		}
 		checkInputs();
 	}
-	clearTheInputs();
-	revertAllOutputs();
 })
-
-//keeping it in outer scope in the event future / other implementations need access to functionality.
 
 btnReset.addEventListener('click', function() {
 	emptyTheInput(allInputs);
 	resetRandomNumber();
 	revertAllOutputs();
+	trueDisableON();
 	//resetRandomNumber needs to return a new random Number;
 	function resetRandomNumber() {
 		return trueRandomNumber = generateRandomNum(minRange, maxRange)
 		console.log(trueRandomNumber);
 	}
 })
-
-
-
-
-
-
-
 
 btnUpdate.addEventListener('click', function() {
 	checkForNumbers();
@@ -89,14 +83,12 @@ btnUpdate.addEventListener('click', function() {
 btnSubmit.addEventListener('click', function() {
 	checkForNames();
 	checkForNumbers();
-
 	function checkForNumbers() {
 		if ( ch1Guess.value.length > 0 && ch2Guess.value.length > 0 ) {
-			// console.log("1output is: " + ch1Guess[0] );
-			// console.log("2output type is: " + typeof(ch1Guess));
-			// // console.log("3output array is: " + Array.isArray(ch1Guess));
 			ch1CurGuess.innerText = ch1Guess.value;
 			ch2CurGuess.innerText = ch2Guess.value;
+			btnClear.className += " btn-active";
+			trueDisableOFF();
 		} else {
 			alert("Please enter valid names and inputs in all the fields.")
 		}
@@ -111,14 +103,48 @@ btnSubmit.addEventListener('click', function() {
 		} else {
 			updateAll(ch1NameInput, ch1NameOutput);
 			updateAll(ch2NameInput, ch2NameOutput);
+			btnClear.className += " btn-active";
+			btnReset.className += " btn-active";
+			trueDisableOFF();
 			console.log('name is valid');
 		}
 	}
 });
 
-
-
 /*=== TEMPORARILY GLOBAL FUNCTIONS && VARIABLES ====*/
+function trueDisableON() {
+	btnReset.disabled = true;
+	btnClear.disabled = true;	
+}
+
+function trueDisableOFF() {
+	btnReset.disabled = false;
+	btnClear.disabled = false;		
+}
+
+disableButtons();
+function disableButtons(target) {
+	if (minRange.value.length > 0 || maxRange.value.length > 0 || ch1NameInput.value.length > 0 || ch2NameInput.value.length > 0 || 
+		ch1Guess.value.length > 0 || ch2Guess.value.length > 0) {
+		console.log('false')
+	} else {
+		btnClear.className += " btn-disabled";
+		btnReset.className += " btn-disabled";
+		trueDisableON()
+		console.log('true')
+	}
+}
+
+// trueDisable('btn')
+// function trueDisable(list) {
+// 	let element = document.getElementsByClassName(list);
+// 	console.log(element)
+// 	for (let element of list) {
+// 		//each element is currently show up as undefined
+// 		console.log(list[element.tagName]);
+// 		// element.className += " amazing";
+// 	}
+// }
 
 let trueRandomNumber;
 let allInputs = Array.from(document.getElementsByTagName('input'));
@@ -148,6 +174,8 @@ function revertAllOutputs() {
 	updateAll(null, ch2NameOutput, 'Challenger 2 Name');
 	ch1CurGuess.innerText = 0;
 	ch2CurGuess.innerText = 0;
+	btnClear.classList.remove("btn-active");
+	btnReset.classList.remove("btn-active");
 }
 
 //target specific DOM outputs with specific DOM inputs

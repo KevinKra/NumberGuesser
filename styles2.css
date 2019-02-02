@@ -132,6 +132,22 @@ input[type=number]::-webkit-outer-spin-button {
 	outline: none;
 }
 
+.btn-disabled {
+	background-color: #D0D2D3;
+}
+
+.btn-disabled:hover {
+	background-color: #D0D2D3;
+}
+
+.btn-active {
+	background-color: #6E6E6E;
+}
+
+.btn-active:hover {
+	background-color: #DD1972;
+}
+
 .btn-x {
 	background-color: #6E6E6E;
 	border: none;
