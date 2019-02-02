@@ -16,14 +16,16 @@ let ch2Guess = document.querySelector('.ch-2-guess');
 
 let ch1CurGuess = document.querySelector('.ch-1-cur-guess'); 
 let ch2CurGuess = document.querySelector('.ch-2-cur-guess');
-let ch1NameOutput = document.querySelectorAll('.ch1-name-output')
-let ch2NameOutput = document.querySelectorAll('.ch2-name-output')
-
+let ch1NameOutput = document.querySelectorAll('.ch1-name-output');
+let ch2NameOutput = document.querySelectorAll('.ch2-name-output');
 
 /*=== Error Queries ====*/
-let errorInputName = document.querySelectorAll('.error')
-let errorInputNumb = document.querySelectorAll('.error-2')
+let errorInputName = document.querySelectorAll('.error');
+let errorInputNumb = document.querySelectorAll('.error-2');
 
+/*=== OutPut Targets ====*/
+let howCloseOutput1 = document.querySelector('.chall-approx-1');
+let howCloseOutput2 = document.querySelector('.chall-approx-2');
 
 /* ==== BUTTONS ==== */
 let btnUpdate = document.querySelector('.update-btn');
@@ -83,6 +85,7 @@ btnUpdate.addEventListener('click', function() {
 btnSubmit.addEventListener('click', function() {
 	checkForNames();
 	checkForNumbers();
+	howClose()
 	function checkForNumbers() {
 		if ( ch1Guess.value.length > 0 && ch2Guess.value.length > 0 ) {
 			ch1CurGuess.innerText = ch1Guess.value;
@@ -111,6 +114,10 @@ btnSubmit.addEventListener('click', function() {
 	}
 });
 
+
+
+
+
 /*=== TEMPORARILY GLOBAL FUNCTIONS && VARIABLES ====*/
 function trueDisableON() {
 	btnReset.disabled = true;
@@ -135,16 +142,40 @@ function disableButtons(target) {
 	}
 }
 
-// trueDisable('btn')
-// function trueDisable(list) {
-// 	let element = document.getElementsByClassName(list);
-// 	console.log(element)
-// 	for (let element of list) {
-// 		//each element is currently show up as undefined
-// 		console.log(list[element.tagName]);
-// 		// element.className += " amazing";
-// 	}
-// }
+function howClose() {
+
+	let player1Guess = parseInt(ch1Guess.value);
+	let player2Guess = parseInt(ch2Guess.value);
+	console.log(player1Guess, player2Guess);
+	howCloseEach(player1Guess, player2Guess);
+	howCloseEach(null, player2Guess);
+
+	function howCloseEach(challengerGuess1, challengerGuess2) {
+		if (challengerGuess1 !== null) {
+			if (challengerGuess1 === trueRandomNumber) {
+				howCloseOutput1.innerText = 'Boom';
+				console.log('should say boom');
+			} else if (challengerGuess1 > trueRandomNumber) {
+				howCloseOutput1.innerText = 'high';
+				console.log('should say too high');
+			} else {
+				howCloseOutput1.innerText = 'low';
+				console.log('should say too low');
+			}
+		} else {
+			if (challengerGuess2 === trueRandomNumber) {
+				howCloseOutput2.innerText = 'Boom';
+				console.log('should say boom');
+			} else if (challengerGuess2 > trueRandomNumber) {
+				howCloseOutput2.innerText = 'high';
+				console.log('should say too high');
+			} else {
+				howCloseOutput2.innerText = 'low';
+				console.log('should say too low');
+			}
+		}
+	}
+}
 
 let trueRandomNumber;
 let allInputs = Array.from(document.getElementsByTagName('input'));
