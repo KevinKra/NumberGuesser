@@ -17,6 +17,14 @@ body {
 main {
 }
 
+
+/* turn off number spinners */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
 /*
 #DD1972
 #F7F7F7
@@ -62,6 +70,18 @@ main {
 	font-weight: 300;
 }
 
+/*====== JS FUNCTIONALITY ======*/
+.hidden {
+	visibility: hidden;
+}
+
+.show {
+	visibility: visible;
+}
+
+
+
+
 /*====== MODULAR RULES ======*/
 .article-box {
 	background-color: #FFF;
@@ -94,7 +114,7 @@ main {
 }
 
 .btn {
-	background-color: #D0D2D3;
+	background-color: #6E6E6E;
 	border: none;
 	color: #FFF;
 	border-radius: 50px;
@@ -112,8 +132,24 @@ main {
 	outline: none;
 }
 
-.btn-x {
+.btn-disabled {
 	background-color: #D0D2D3;
+}
+
+.btn-disabled:hover {
+	background-color: #D0D2D3;
+}
+
+.btn-active {
+	background-color: #6E6E6E;
+}
+
+.btn-active:hover {
+	background-color: #DD1972;
+}
+
+.btn-x {
+	background-color: #6E6E6E;
 	border: none;
 	color: #FFF;
 	border-radius: 50%;

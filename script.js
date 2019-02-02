@@ -1,5 +1,7 @@
 /* ==== QUERIES ==== */
 
+
+// All these querySelectors return a static (not live) Array-like object.
 /* =Range Queries= */
 let minRange = document.querySelector('.min-range');
 let maxRange = document.querySelector('.max-range');
@@ -30,76 +32,258 @@ let btnReset = document.querySelector('.reset-btn');
 let btnClear = document.querySelector('.clear-btn');
 
 
+
+btnClear.addEventListener('click', function() {
+	clearTheInputs();
+	revertAllOutputs();
+	trueDisableON();
+	function clearTheInputs() {
+		function checkInputs() {
+			if (minRange.value.length > 0 || maxRange.value.length > 0 || ch1NameInput.value.length > 0 || ch2NameInput.value.length > 0 || 
+				ch1Guess.value.length > 0 || ch2Guess.value.length > 0) {
+				emptyTheInput(allInputs);
+				// btnClear.classList.remove("btn-active");
+				console.log(trueRandomNumber);
+			} else {
+				console.log('CLEAR INVALID');
+			}
+		}
+		checkInputs();
+	}
+})
+
+btnReset.addEventListener('click', function() {
+	emptyTheInput(allInputs);
+	resetRandomNumber();
+	revertAllOutputs();
+	trueDisableON();
+	//resetRandomNumber needs to return a new random Number;
+	function resetRandomNumber() {
+		return trueRandomNumber = generateRandomNum(minRange, maxRange)
+		console.log(trueRandomNumber);
+	}
+})
+
 btnUpdate.addEventListener('click', function() {
-	rangeLow.innerText = minRange.value;
-	rangeHigh.innerText = maxRange.value;
+	checkForNumbers();
+
+	function checkForNumbers() {
+		if ( (minRange.value.length > 0 && maxRange.value.length > 0) && ( parseInt(minRange.value) < parseInt(maxRange.value) ) ) {
+			rangeLow.innerText = minRange.value;
+			rangeHigh.innerText = maxRange.value;
+			trueRandomNumber = generateRandomNum(minRange.value, maxRange.value);
+		} else {
+			console.log('false');
+			console.log(minRange.value)
+			console.log(maxRange.value)
+		}
+	}
 });
 
 btnSubmit.addEventListener('click', function() {
-	ch1CurGuess.innerText = ch1Guess.value;
-	ch2CurGuess.innerText = ch2Guess.value;
-	updateAll(ch1NameInput, ch1NameOutput);
-	updateAll(ch2NameInput, ch2NameOutput);
+	checkForNames();
+	checkForNumbers();
+	function checkForNumbers() {
+		if ( ch1Guess.value.length > 0 && ch2Guess.value.length > 0 ) {
+			ch1CurGuess.innerText = ch1Guess.value;
+			ch2CurGuess.innerText = ch2Guess.value;
+			btnClear.className += " btn-active";
+			trueDisableOFF();
+		} else {
+			alert("Please enter valid names and inputs in all the fields.")
+		}
+	}
+
+	function checkForNames() {
+		let invalidName = /[^a-z0-9]+/gi;
+		if ((invalidName.test(ch1NameInput.value) || (ch1NameInput.value.length < 1) 
+			|| (invalidName.test(ch2NameInput.value) || (ch2NameInput.value.length < 1)))) {
+			console.log('name is invalid');
+			alert("Please enter alpha-numeric names only.")
+		} else {
+			updateAll(ch1NameInput, ch1NameOutput);
+			updateAll(ch2NameInput, ch2NameOutput);
+			btnClear.className += " btn-active";
+			btnReset.className += " btn-active";
+			trueDisableOFF();
+			console.log('name is valid');
+		}
+	}
 });
 
-
-updateColorRed(errorInputName, errorInputNumb, ch1NameOutput)
-
-
-// updateVisibility(errorInputName);
-
-
-
-// ==== FUNCTIONALITY ==== //
-
-//target specific outputs with specific inputs
-function updateAll(query, output) {
- 	let qValue = query.value;
-	return changeContent(qValue, output);
+/*=== TEMPORARILY GLOBAL FUNCTIONS && VARIABLES ====*/
+function trueDisableON() {
+	btnReset.disabled = true;
+	btnClear.disabled = true;	
 }
-function changeContent(input, output) {
-	let changeHTML = element => element.innerHTML = input;
+
+function trueDisableOFF() {
+	btnReset.disabled = false;
+	btnClear.disabled = false;		
+}
+
+disableButtons();
+function disableButtons(target) {
+	if (minRange.value.length > 0 || maxRange.value.length > 0 || ch1NameInput.value.length > 0 || ch2NameInput.value.length > 0 || 
+		ch1Guess.value.length > 0 || ch2Guess.value.length > 0) {
+		console.log('false')
+	} else {
+		btnClear.className += " btn-disabled";
+		btnReset.className += " btn-disabled";
+		trueDisableON()
+		console.log('true')
+	}
+}
+
+// trueDisable('btn')
+// function trueDisable(list) {
+// 	let element = document.getElementsByClassName(list);
+// 	console.log(element)
+// 	for (let element of list) {
+// 		//each element is currently show up as undefined
+// 		console.log(list[element.tagName]);
+// 		// element.className += " amazing";
+// 	}
+// }
+
+let trueRandomNumber;
+let allInputs = Array.from(document.getElementsByTagName('input'));
+
+function generateRandomNum(minRange, maxRange) {
+	minRange = rangeLow.innerText;
+	maxRange = rangeHigh.innerText;
+	let randomNum = Math.floor((Math.random() * maxRange) + minRange) +1;
+	console.log(randomNum)
+	return randomNum;
+}
+
+
+// function emptyTheInput(element) {
+// 	element.value = '';
+// }
+
+
+function emptyTheInput(array) {
+	for (let i = 0; i < array.length; i++) {
+		array[i].value = '';
+	}
+}
+
+function revertAllOutputs() {
+	updateAll(null, ch1NameOutput, 'Challenger 1 Name');
+	updateAll(null, ch2NameOutput, 'Challenger 2 Name');
+	ch1CurGuess.innerText = 0;
+	ch2CurGuess.innerText = 0;
+	btnClear.classList.remove("btn-active");
+	btnReset.classList.remove("btn-active");
+}
+
+//target specific DOM outputs with specific DOM inputs
+function updateAll(query, output, string) {
+ 	if (query === null) {
+ 		return changeContent(null, output, string);
+ 	} else {
+ 		let qValue = query.value;
+ 		return changeContent(qValue, output, string);
+ 	}
+}
+function changeContent(input, output, string) {
+	// console.log("input is: " + input );
+	// console.log("string argument is : " + string);
+	let changeHtml;
+	if (input === null) {
+		changeHTML = element => element.innerHTML = string;
+	} else {
+		changeHTML = element => element.innerHTML = input;
+	}
 	output.forEach(changeHTML);
 }
 
 
-let visibilityHidden = (element) => {element.style.visibility = 'hidden'};
-let visibilityShow = (element) => {element.style.visibility = 'visible'};
+
+
+
+// function updateAll(query, output, string) {
+//  	let qValue = query.value;
+// 	return changeContent(qValue, output, string);
+// }
+// function changeContent(input, output, string) {
+// 	console.log("input is: " input );
+// 	let changeHTML = element => element.innerHTML = input;
+// 	output.forEach(changeHTML);
+// }
+// updateColorRed(errorInputName, errorInputNumb, ch1NameOutput)
+// updateVisibility(errorInputName);
 
 
 
 
-// checkForInput(minRange,maxRange,ch1NameInput,ch2NameInput,ch1Guess,ch2Guess)
 
-// function checkForInput(...inputs) {
-// 	inputs.forEach()
 
-// 	function inputChecker() {
-// 	if (inputs.value.length == 0 ) {
-// 		console.log('sort of working')
-// 	} else {
-// 		console.log('nope');
-// 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// let visibilityHidden = (element) => {element.style.visibility = 'hidden'};
+// let visibilityShow = (element) => {element.style.visibility = 'visible'};
+
+
+// //HOFs
+// //modify n arguments including nodeLists --currently changes visibility to hidden
+// function updateVisibility(...inputs) {
+// 	//array of Nodelists
+// 	let visibilityHidden = (element) => {element.style.visibility = 'hidden'};
+// 	return inputs.map(element => element.forEach(visibilityHidden));
 // }
 
+// //modify n arguments including nodeLists --currently changes colors to red
+// // function updateColorRed(...inputs) {
+// // 	//array of Nodelists
+// // 	let changeColor = (element) => {element.style.color = 'blue'}
+// // 	return inputs.map(element => element.forEach(changeColor));
+// // }
 
+// toArray(errorInputName, errorInputNumb, ch1NameOutput)
 
-
-//HOFs
-//modify n arguments including nodeLists --currently changes visibility to hidden
-function updateVisibility(...inputs) {
-	//array of Nodelists
-	let visibilityHidden = (element) => {element.style.visibility = 'hidden'};
-	return inputs.map(element => element.forEach(visibilityHidden));
-}
-
-//modify n arguments including nodeLists --currently changes colors to red
-function updateColorRed(...inputs) {
-	//array of Nodelists
-	let changeColor = (element) => {element.style.color = 'blue'}
-	return inputs.map(element => element.forEach(changeColor));
-}
-
+// function toArray(...inputs) {
+// 	//array of Nodelists
+// 	let convertToArr = (element) => {Array.from(element)}
+// 	let inputArr = inputs.map(convertToArr);
+// 	console.log(inputArr);
+// }
 
 
 
