@@ -114,7 +114,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .btn {
-	background-color: #D0D2D3;
+	background-color: #6E6E6E;
 	border: none;
 	color: #FFF;
 	border-radius: 50px;
@@ -133,7 +133,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .btn-x {
-	background-color: #D0D2D3;
+	background-color: #6E6E6E;
 	border: none;
 	color: #FFF;
 	border-radius: 50%;
