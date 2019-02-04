@@ -75,7 +75,7 @@ btnUpdate.addEventListener('click', function() {
 			rangeHigh.innerText = maxRange.value;
 			trueRandomNumber = generateRandomNum(minRange.value, maxRange.value);
 		} else {
-			console.log('false');
+			alert('false');
 			console.log(minRange.value)
 			console.log(maxRange.value)
 		}
@@ -85,9 +85,10 @@ btnUpdate.addEventListener('click', function() {
 btnSubmit.addEventListener('click', function() {
 	checkForNames();
 	checkForNumbers();
+	stayInRangeAlert();
 	howClose()
 	function checkForNumbers() {
-		if ( ch1Guess.value.length > 0 && ch2Guess.value.length > 0 ) {
+		if ( (ch1Guess.value.length > 0 && ch2Guess.value.length > 0) && (ch1Guess.value != false && ch2Guess.value != false )) {
 			ch1CurGuess.innerText = ch1Guess.value;
 			ch2CurGuess.innerText = ch2Guess.value;
 			btnClear.className += " btn-active";
@@ -129,6 +130,15 @@ function trueDisableOFF() {
 	btnClear.disabled = false;		
 }
 
+function stayInRangeAlert() {
+	if (((parseInt(minRange.value) <= parseInt(ch1Guess.value)) && (parseInt(ch1Guess.value) <= parseInt(maxRange.value))) && 
+		((parseInt(minRange.value) <= parseInt(ch2Guess.value)) && (parseInt(ch2Guess.value) <= parseInt(maxRange.value)))){
+		console.log('theyre in between');
+	} else {
+		console.log('theyre not in between');
+	}
+}
+
 disableButtons();
 function disableButtons(target) {
 	if (minRange.value.length > 0 || maxRange.value.length > 0 || ch1NameInput.value.length > 0 || ch2NameInput.value.length > 0 || 
@@ -153,25 +163,19 @@ function howClose() {
 	function howCloseEach(challengerGuess1, challengerGuess2) {
 		if (challengerGuess1 !== null) {
 			if (challengerGuess1 === trueRandomNumber) {
-				howCloseOutput1.innerText = 'Boom';
-				console.log('should say boom');
+				howCloseOutput1.innerText = 'Boom!';
 			} else if (challengerGuess1 > trueRandomNumber) {
-				howCloseOutput1.innerText = 'high';
-				console.log('should say too high');
+				howCloseOutput1.innerText = "that's too high";
 			} else {
-				howCloseOutput1.innerText = 'low';
-				console.log('should say too low');
+				howCloseOutput1.innerText = "that's too low";
 			}
 		} else {
 			if (challengerGuess2 === trueRandomNumber) {
 				howCloseOutput2.innerText = 'Boom';
-				console.log('should say boom');
 			} else if (challengerGuess2 > trueRandomNumber) {
-				howCloseOutput2.innerText = 'high';
-				console.log('should say too high');
+				howCloseOutput2.innerText = "that's too high";
 			} else {
-				howCloseOutput2.innerText = 'low';
-				console.log('should say too low');
+				howCloseOutput2.innerText = "that's too low";
 			}
 		}
 	}
@@ -229,108 +233,6 @@ function changeContent(input, output, string) {
 	}
 	output.forEach(changeHTML);
 }
-
-
-
-
-
-// function updateAll(query, output, string) {
-//  	let qValue = query.value;
-// 	return changeContent(qValue, output, string);
-// }
-// function changeContent(input, output, string) {
-// 	console.log("input is: " input );
-// 	let changeHTML = element => element.innerHTML = input;
-// 	output.forEach(changeHTML);
-// }
-// updateColorRed(errorInputName, errorInputNumb, ch1NameOutput)
-// updateVisibility(errorInputName);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// let visibilityHidden = (element) => {element.style.visibility = 'hidden'};
-// let visibilityShow = (element) => {element.style.visibility = 'visible'};
-
-
-// //HOFs
-// //modify n arguments including nodeLists --currently changes visibility to hidden
-// function updateVisibility(...inputs) {
-// 	//array of Nodelists
-// 	let visibilityHidden = (element) => {element.style.visibility = 'hidden'};
-// 	return inputs.map(element => element.forEach(visibilityHidden));
-// }
-
-// //modify n arguments including nodeLists --currently changes colors to red
-// // function updateColorRed(...inputs) {
-// // 	//array of Nodelists
-// // 	let changeColor = (element) => {element.style.color = 'blue'}
-// // 	return inputs.map(element => element.forEach(changeColor));
-// // }
-
-// toArray(errorInputName, errorInputNumb, ch1NameOutput)
-
-// function toArray(...inputs) {
-// 	//array of Nodelists
-// 	let convertToArr = (element) => {Array.from(element)}
-// 	let inputArr = inputs.map(convertToArr);
-// 	console.log(inputArr);
-// }
-
-
-
-//change non-forms to forms in HTML
-//convert nodeLists to Arrays and then forEach the new arrays
-//arrow function w/o {} implicitly returns, with {} needs return keyword
-
-
-
-
-
-
-
-
-
-
 
 
 
