@@ -2,6 +2,11 @@
 
 
 // All these querySelectors return a static (not live) Array-like object.
+
+/* =Output Section= */
+let outputParent = document.querySelector('.output-section');
+// let outputCard = document.querySelector('.output-card');
+
 /* =Range Queries= */
 let minRange = document.querySelector('.min-range');
 let maxRange = document.querySelector('.max-range');
@@ -32,7 +37,7 @@ let btnUpdate = document.querySelector('.update-btn');
 let btnSubmit = document.querySelector('.submit-btn');
 let btnReset = document.querySelector('.reset-btn');
 let btnClear = document.querySelector('.clear-btn');
-
+let btnX = document.querySelector('.btn-x');
 
 
 btnClear.addEventListener('click', function() {
@@ -68,7 +73,6 @@ btnReset.addEventListener('click', function() {
 
 btnUpdate.addEventListener('click', function() {
 	checkForNumbers();
-
 	function checkForNumbers() {
 		if ( (minRange.value.length > 0 && maxRange.value.length > 0) && ( parseInt(minRange.value) < parseInt(maxRange.value) ) ) {
 			rangeLow.innerText = minRange.value;
@@ -87,6 +91,7 @@ btnSubmit.addEventListener('click', function() {
 	checkForNumbers();
 	stayInRangeAlert();
 	howClose()
+	appendCard();
 	function checkForNumbers() {
 		if ( (ch1Guess.value.length > 0 && ch2Guess.value.length > 0) && (ch1Guess.value != false && ch2Guess.value != false )) {
 			ch1CurGuess.innerText = ch1Guess.value;
@@ -153,7 +158,6 @@ function disableButtons(target) {
 }
 
 function howClose() {
-
 	let player1Guess = parseInt(ch1Guess.value);
 	let player2Guess = parseInt(ch2Guess.value);
 	console.log(player1Guess, player2Guess);
@@ -164,6 +168,7 @@ function howClose() {
 		if (challengerGuess1 !== null) {
 			if (challengerGuess1 === trueRandomNumber) {
 				howCloseOutput1.innerText = 'Boom!';
+				appendCard();
 			} else if (challengerGuess1 > trueRandomNumber) {
 				howCloseOutput1.innerText = "that's too high";
 			} else {
@@ -172,6 +177,7 @@ function howClose() {
 		} else {
 			if (challengerGuess2 === trueRandomNumber) {
 				howCloseOutput2.innerText = 'Boom';
+				appendCard();
 			} else if (challengerGuess2 > trueRandomNumber) {
 				howCloseOutput2.innerText = "that's too high";
 			} else {
@@ -179,6 +185,68 @@ function howClose() {
 			}
 		}
 	}
+}
+
+// btnX.addEventListener('click', function(event) {
+// 	console.log(event.target);
+// });
+
+outputParent.addEventListener('click',function(event) {
+	if (event.target.className === 'btn-x') {
+		console.log('op target: ' + event.target)
+		event.target.parentElement.parentElement.remove();
+	}
+})
+
+
+
+
+
+
+//perhaps create an Array. as the condition is met, we push an element onto the array and then the append function appends the last element of the array onto the output section
+
+function appendCard() {
+	let outputCard = `
+					<article class="output-card">
+					<header class="">
+						<span class="bold ch1-name-output">${ch1NameInput.value}</span>
+						<span class="thin">vs</span>
+						<span class="bold ch2-name-output">${ch2NameInput.value}</span>
+					</header>
+					<hr class="">
+					<article class="output-center">
+						<h1 class="">CHALLENGER 2 NAME</h1>
+						<p>WINNER</p>
+					</article>
+					<hr class="">
+					<footer class="">
+						<section class="output-metrics">
+							<section>
+								<span class="bold">25</span>
+								<span class="thin">GUESSES</span>
+							</section>
+							<section>
+								<span class="bold">3.5</span>
+								<span class="thin">MINUTES</span>
+							</section>
+						</section>
+						<button class="btn-x">X</button>
+					</footer>
+				</article>`
+	outputParent.innerHTML += outputCard;
+
+	btnX.addEventListener('click', function(event) {
+	console.log(event.target);
+});
+
+outputParent.addEventListener('click',function(event) {
+	if (event.target.className === 'btn-x') {
+		console.log('op target: ' + event.target)
+		event.target.parentElement.parentElement.remove();
+	}
+})
+
+	console.log('card should be appended.')
 }
 
 let trueRandomNumber;
@@ -191,12 +259,6 @@ function generateRandomNum(minRange, maxRange) {
 	console.log(randomNum)
 	return randomNum;
 }
-
-
-// function emptyTheInput(element) {
-// 	element.value = '';
-// }
-
 
 function emptyTheInput(array) {
 	for (let i = 0; i < array.length; i++) {
