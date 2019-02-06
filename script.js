@@ -91,7 +91,6 @@ btnSubmit.addEventListener('click', function() {
 	checkForNumbers();
 	stayInRangeAlert();
 	howClose()
-	appendCard();
 	function checkForNumbers() {
 		if ( (ch1Guess.value.length > 0 && ch2Guess.value.length > 0) && (ch1Guess.value != false && ch2Guess.value != false )) {
 			ch1CurGuess.innerText = ch1Guess.value;
@@ -168,7 +167,7 @@ function howClose() {
 		if (challengerGuess1 !== null) {
 			if (challengerGuess1 === trueRandomNumber) {
 				howCloseOutput1.innerText = 'Boom!';
-				appendCard();
+				appendCard(ch1NameInput);
 			} else if (challengerGuess1 > trueRandomNumber) {
 				howCloseOutput1.innerText = "that's too high";
 			} else {
@@ -177,7 +176,7 @@ function howClose() {
 		} else {
 			if (challengerGuess2 === trueRandomNumber) {
 				howCloseOutput2.innerText = 'Boom';
-				appendCard();
+				appendCard(ch2NameInput);
 			} else if (challengerGuess2 > trueRandomNumber) {
 				howCloseOutput2.innerText = "that's too high";
 			} else {
@@ -205,7 +204,8 @@ outputParent.addEventListener('click',function(event) {
 
 //perhaps create an Array. as the condition is met, we push an element onto the array and then the append function appends the last element of the array onto the output section
 
-function appendCard() {
+function appendCard(winner) {
+	console.log(winner);
 	let outputCard = `
 					<article class="output-card">
 					<header class="">
@@ -215,7 +215,7 @@ function appendCard() {
 					</header>
 					<hr class="">
 					<article class="output-center">
-						<h1 class="">CHALLENGER 2 NAME</h1>
+						<h1 class="">${winner.value}</h1>
 						<p>WINNER</p>
 					</article>
 					<hr class="">
@@ -233,12 +233,8 @@ function appendCard() {
 						<button class="btn-x">X</button>
 					</footer>
 				</article>`
-	outputParent.innerHTML += outputCard;
 
-	btnX.addEventListener('click', function(event) {
-	console.log(event.target);
-});
-
+outputParent.innerHTML += outputCard;
 outputParent.addEventListener('click',function(event) {
 	if (event.target.className === 'btn-x') {
 		console.log('op target: ' + event.target)
