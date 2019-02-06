@@ -91,6 +91,8 @@ btnSubmit.addEventListener('click', function() {
 	checkForNumbers();
 	stayInRangeAlert();
 	howClose()
+	guessCounter()
+	console.log(totalGuesses);
 	function checkForNumbers() {
 		if ( (ch1Guess.value.length > 0 && ch2Guess.value.length > 0) && (ch1Guess.value != false && ch2Guess.value != false )) {
 			ch1CurGuess.innerText = ch1Guess.value;
@@ -117,11 +119,11 @@ btnSubmit.addEventListener('click', function() {
 			console.log('name is valid');
 		}
 	}
+
+	function guessCounter() {
+	totalGuesses++;
+	}
 });
-
-
-
-
 
 /*=== TEMPORARILY GLOBAL FUNCTIONS && VARIABLES ====*/
 function trueDisableON() {
@@ -222,7 +224,7 @@ function appendCard(winner) {
 					<footer class="">
 						<section class="output-metrics">
 							<section>
-								<span class="bold">25</span>
+								<span class="bold">${totalGuesses}</span>
 								<span class="thin">GUESSES</span>
 							</section>
 							<section>
@@ -233,9 +235,8 @@ function appendCard(winner) {
 						<button class="btn-x">X</button>
 					</footer>
 				</article>`
-
-outputParent.innerHTML += outputCard;
-outputParent.addEventListener('click',function(event) {
+	outputParent.innerHTML += outputCard;
+	outputParent.addEventListener('click',function(event) {
 	if (event.target.className === 'btn-x') {
 		console.log('op target: ' + event.target)
 		event.target.parentElement.parentElement.remove();
@@ -245,6 +246,7 @@ outputParent.addEventListener('click',function(event) {
 	console.log('card should be appended.')
 }
 
+let totalGuesses = 0;
 let trueRandomNumber;
 let allInputs = Array.from(document.getElementsByTagName('input'));
 
