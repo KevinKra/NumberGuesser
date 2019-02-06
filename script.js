@@ -25,8 +25,8 @@ let ch1NameOutput = document.querySelectorAll('.ch1-name-output');
 let ch2NameOutput = document.querySelectorAll('.ch2-name-output');
 
 /*=== Error Queries ====*/
-let errorInputName = document.querySelectorAll('.error');
-let errorInputNumb = document.querySelectorAll('.error-2');
+let errorInputName = document.querySelector('.error-name');
+let errorInputNumb = document.querySelector('.error-2');
 
 /*=== OutPut Targets ====*/
 let howCloseOutput1 = document.querySelector('.chall-approx-1');
@@ -90,8 +90,8 @@ btnSubmit.addEventListener('click', function() {
 	checkForNames();
 	checkForNumbers();
 	stayInRangeAlert();
-	howClose()
-	guessCounter()
+	guessCounter();
+	howClose();
 	console.log(totalGuesses);
 	function checkForNumbers() {
 		if ( (ch1Guess.value.length > 0 && ch2Guess.value.length > 0) && (ch1Guess.value != false && ch2Guess.value != false )) {
@@ -100,7 +100,7 @@ btnSubmit.addEventListener('click', function() {
 			btnClear.className += " btn-active";
 			trueDisableOFF();
 		} else {
-			alert("Please enter valid names and inputs in all the fields.")
+			alert("Please enter a valid number.")
 		}
 	}
 
@@ -108,7 +108,6 @@ btnSubmit.addEventListener('click', function() {
 		let invalidName = /[^a-z0-9]+/gi;
 		if ((invalidName.test(ch1NameInput.value) || (ch1NameInput.value.length < 1) 
 			|| (invalidName.test(ch2NameInput.value) || (ch2NameInput.value.length < 1)))) {
-			console.log('name is invalid');
 			alert("Please enter alpha-numeric names only.")
 		} else {
 			updateAll(ch1NameInput, ch1NameOutput);
@@ -119,7 +118,6 @@ btnSubmit.addEventListener('click', function() {
 			console.log('name is valid');
 		}
 	}
-
 	function guessCounter() {
 	totalGuesses++;
 	}
@@ -198,9 +196,15 @@ outputParent.addEventListener('click',function(event) {
 	}
 })
 
+// function errorText(inputTarget) {
+// document.getElementsByClassName(inputTarget)[0].addEventListener("click", function() {
+// 		alert('cool') 
+// 		errorInputName.className += " show";
+// 	});
+// }
 
-
-
+// errorText('ch-1-name');
+// errorText('ch-2-name');
 
 
 //perhaps create an Array. as the condition is met, we push an element onto the array and then the append function appends the last element of the array onto the output section
@@ -241,18 +245,16 @@ function appendCard(winner) {
 		event.target.parentElement.parentElement.remove();
 	}
 })
-
-	console.log('card should be appended.')
 }
 
 let totalGuesses = 0;
 let trueRandomNumber;
 let allInputs = Array.from(document.getElementsByTagName('input'));
 
-function generateRandomNum(minRange, maxRange) {
-	minRange = rangeLow.innerText;
-	maxRange = rangeHigh.innerText;
-	let randomNum = Math.floor((Math.random() * maxRange) + minRange) +1;
+function generateRandomNum(minRange = 0, maxRange = 100) {
+	minRange = parseInt(rangeLow.innerText);
+	maxRange = parseInt(rangeHigh.innerText);
+	let randomNum = Math.floor((Math.random() * (maxRange - minRange + 1) + minRange));
 	console.log(randomNum)
 	return randomNum;
 }
@@ -282,8 +284,6 @@ function updateAll(query, output, string) {
  	}
 }
 function changeContent(input, output, string) {
-	// console.log("input is: " + input );
-	// console.log("string argument is : " + string);
 	let changeHtml;
 	if (input === null) {
 		changeHTML = element => element.innerHTML = string;
