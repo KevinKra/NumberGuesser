@@ -77,7 +77,7 @@ btnUpdate.addEventListener('click', function() {
 		if ( (minRange.value.length > 0 && maxRange.value.length > 0) && ( parseInt(minRange.value) < parseInt(maxRange.value) ) ) {
 			rangeLow.innerText = minRange.value;
 			rangeHigh.innerText = maxRange.value;
-			trueRandomNumber = generateRandomNum(minRange.value, maxRange.value);
+			trueRandomNumber = generateRandomNum(minRange.value, maxRange.value, null);
 		} else {
 			alert('ALERT: Your maximum value is less than your minimum value!');
 			console.log(minRange.value)
@@ -92,7 +92,7 @@ btnSubmit.addEventListener('click', function() {
 	stayInRangeAlert();
 	guessCounter();
 	howClose();
-	console.log(totalGuesses);
+	console.log("total guesses: " + totalGuesses);
 	function checkForNumbers() {
 		if ( (ch1Guess.value.length > 0 && ch2Guess.value.length > 0) && (ch1Guess.value != false && ch2Guess.value != false )) {
 			ch1CurGuess.innerText = ch1Guess.value;
@@ -167,6 +167,8 @@ function howClose() {
 			if (challengerGuess1 === trueRandomNumber) {
 				howCloseOutput1.innerText = 'Boom!';
 				appendCard(ch1NameInput);
+				trueRandomNumber = generateRandomNum(minRange.value, maxRange.value);
+				totalGuesses = 0;
 			} else if (challengerGuess1 > trueRandomNumber) {
 				howCloseOutput1.innerText = "that's too high";
 			} else {
@@ -176,6 +178,8 @@ function howClose() {
 			if (challengerGuess2 === trueRandomNumber) {
 				howCloseOutput2.innerText = 'Boom';
 				appendCard(ch2NameInput);
+				trueRandomNumber = generateRandomNum(minRange.value, maxRange.value);
+				totalGuesses = 0;
 			} else if (challengerGuess2 > trueRandomNumber) {
 				howCloseOutput2.innerText = "that's too high";
 			} else {
@@ -185,9 +189,6 @@ function howClose() {
 	}
 }
 
-// btnX.addEventListener('click', function(event) {
-// 	console.log(event.target);
-// });
 
 outputParent.addEventListener('click',function(event) {
 	if (event.target.className === 'btn-x') {
@@ -195,16 +196,6 @@ outputParent.addEventListener('click',function(event) {
 		event.target.parentElement.parentElement.remove();
 	}
 })
-
-// function errorText(inputTarget) {
-// document.getElementsByClassName(inputTarget)[0].addEventListener("click", function() {
-// 		alert('cool') 
-// 		errorInputName.className += " show";
-// 	});
-// }
-
-// errorText('ch-1-name');
-// errorText('ch-2-name');
 
 
 //perhaps create an Array. as the condition is met, we push an element onto the array and then the append function appends the last element of the array onto the output section
@@ -251,11 +242,12 @@ let totalGuesses = 0;
 let trueRandomNumber;
 let allInputs = Array.from(document.getElementsByTagName('input'));
 
-function generateRandomNum(minRange = 0, maxRange = 100) {
+let globalInterval;
+function generateRandomNum(minRange = 1, maxRange = 100) {
 	minRange = parseInt(rangeLow.innerText);
 	maxRange = parseInt(rangeHigh.innerText);
-	let randomNum = Math.floor((Math.random() * (maxRange - minRange + 1) + minRange));
-	console.log(randomNum)
+	let randomNum = Math.floor((Math.random() * ((maxRange  - minRange + 1)) + minRange));
+	console.log("current random number is: " + randomNum);
 	return randomNum;
 }
 
