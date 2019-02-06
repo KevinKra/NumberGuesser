@@ -2,6 +2,11 @@
 
 
 // All these querySelectors return a static (not live) Array-like object.
+
+/* =Output Section= */
+let outputParent = document.querySelector('.output-section');
+// let outputCard = document.querySelector('.output-card');
+
 /* =Range Queries= */
 let minRange = document.querySelector('.min-range');
 let maxRange = document.querySelector('.max-range');
@@ -16,21 +21,23 @@ let ch2Guess = document.querySelector('.ch-2-guess');
 
 let ch1CurGuess = document.querySelector('.ch-1-cur-guess'); 
 let ch2CurGuess = document.querySelector('.ch-2-cur-guess');
-let ch1NameOutput = document.querySelectorAll('.ch1-name-output')
-let ch2NameOutput = document.querySelectorAll('.ch2-name-output')
-
+let ch1NameOutput = document.querySelectorAll('.ch1-name-output');
+let ch2NameOutput = document.querySelectorAll('.ch2-name-output');
 
 /*=== Error Queries ====*/
-let errorInputName = document.querySelectorAll('.error')
-let errorInputNumb = document.querySelectorAll('.error-2')
+let errorInputName = document.querySelectorAll('.error');
+let errorInputNumb = document.querySelectorAll('.error-2');
 
+/*=== OutPut Targets ====*/
+let howCloseOutput1 = document.querySelector('.chall-approx-1');
+let howCloseOutput2 = document.querySelector('.chall-approx-2');
 
 /* ==== BUTTONS ==== */
 let btnUpdate = document.querySelector('.update-btn');
 let btnSubmit = document.querySelector('.submit-btn');
 let btnReset = document.querySelector('.reset-btn');
 let btnClear = document.querySelector('.clear-btn');
-
+let btnX = document.querySelector('.btn-x');
 
 
 btnClear.addEventListener('click', function() {
@@ -66,14 +73,13 @@ btnReset.addEventListener('click', function() {
 
 btnUpdate.addEventListener('click', function() {
 	checkForNumbers();
-
 	function checkForNumbers() {
 		if ( (minRange.value.length > 0 && maxRange.value.length > 0) && ( parseInt(minRange.value) < parseInt(maxRange.value) ) ) {
 			rangeLow.innerText = minRange.value;
 			rangeHigh.innerText = maxRange.value;
 			trueRandomNumber = generateRandomNum(minRange.value, maxRange.value);
 		} else {
-			console.log('false');
+			alert('false');
 			console.log(minRange.value)
 			console.log(maxRange.value)
 		}
@@ -83,8 +89,10 @@ btnUpdate.addEventListener('click', function() {
 btnSubmit.addEventListener('click', function() {
 	checkForNames();
 	checkForNumbers();
+	stayInRangeAlert();
+	howClose()
 	function checkForNumbers() {
-		if ( ch1Guess.value.length > 0 && ch2Guess.value.length > 0 ) {
+		if ( (ch1Guess.value.length > 0 && ch2Guess.value.length > 0) && (ch1Guess.value != false && ch2Guess.value != false )) {
 			ch1CurGuess.innerText = ch1Guess.value;
 			ch2CurGuess.innerText = ch2Guess.value;
 			btnClear.className += " btn-active";
@@ -111,6 +119,10 @@ btnSubmit.addEventListener('click', function() {
 	}
 });
 
+
+
+
+
 /*=== TEMPORARILY GLOBAL FUNCTIONS && VARIABLES ====*/
 function trueDisableON() {
 	btnReset.disabled = true;
@@ -120,6 +132,15 @@ function trueDisableON() {
 function trueDisableOFF() {
 	btnReset.disabled = false;
 	btnClear.disabled = false;		
+}
+
+function stayInRangeAlert() {
+	if (((parseInt(minRange.value) <= parseInt(ch1Guess.value)) && (parseInt(ch1Guess.value) <= parseInt(maxRange.value))) && 
+		((parseInt(minRange.value) <= parseInt(ch2Guess.value)) && (parseInt(ch2Guess.value) <= parseInt(maxRange.value)))){
+		console.log('theyre in between');
+	} else {
+		console.log('theyre not in between');
+	}
 }
 
 disableButtons();
@@ -135,16 +156,94 @@ function disableButtons(target) {
 	}
 }
 
-// trueDisable('btn')
-// function trueDisable(list) {
-// 	let element = document.getElementsByClassName(list);
-// 	console.log(element)
-// 	for (let element of list) {
-// 		//each element is currently show up as undefined
-// 		console.log(list[element.tagName]);
-// 		// element.className += " amazing";
-// 	}
-// }
+function howClose() {
+	let player1Guess = parseInt(ch1Guess.value);
+	let player2Guess = parseInt(ch2Guess.value);
+	console.log(player1Guess, player2Guess);
+	howCloseEach(player1Guess, player2Guess);
+	howCloseEach(null, player2Guess);
+
+	function howCloseEach(challengerGuess1, challengerGuess2) {
+		if (challengerGuess1 !== null) {
+			if (challengerGuess1 === trueRandomNumber) {
+				howCloseOutput1.innerText = 'Boom!';
+				appendCard(ch1NameInput);
+			} else if (challengerGuess1 > trueRandomNumber) {
+				howCloseOutput1.innerText = "that's too high";
+			} else {
+				howCloseOutput1.innerText = "that's too low";
+			}
+		} else {
+			if (challengerGuess2 === trueRandomNumber) {
+				howCloseOutput2.innerText = 'Boom';
+				appendCard(ch2NameInput);
+			} else if (challengerGuess2 > trueRandomNumber) {
+				howCloseOutput2.innerText = "that's too high";
+			} else {
+				howCloseOutput2.innerText = "that's too low";
+			}
+		}
+	}
+}
+
+// btnX.addEventListener('click', function(event) {
+// 	console.log(event.target);
+// });
+
+outputParent.addEventListener('click',function(event) {
+	if (event.target.className === 'btn-x') {
+		console.log('op target: ' + event.target)
+		event.target.parentElement.parentElement.remove();
+	}
+})
+
+
+
+
+
+
+//perhaps create an Array. as the condition is met, we push an element onto the array and then the append function appends the last element of the array onto the output section
+
+function appendCard(winner) {
+	console.log(winner);
+	let outputCard = `
+					<article class="output-card">
+					<header class="">
+						<span class="bold ch1-name-output">${ch1NameInput.value}</span>
+						<span class="thin">vs</span>
+						<span class="bold ch2-name-output">${ch2NameInput.value}</span>
+					</header>
+					<hr class="">
+					<article class="output-center">
+						<h1 class="">${winner.value}</h1>
+						<p>WINNER</p>
+					</article>
+					<hr class="">
+					<footer class="">
+						<section class="output-metrics">
+							<section>
+								<span class="bold">25</span>
+								<span class="thin">GUESSES</span>
+							</section>
+							<section>
+								<span class="bold">3.5</span>
+								<span class="thin">MINUTES</span>
+							</section>
+						</section>
+						<button class="btn-x">X</button>
+					</footer>
+				</article>`
+
+outputParent.innerHTML += outputCard;
+outputParent.addEventListener('click',function(event) {
+	if (event.target.className === 'btn-x') {
+		console.log('op target: ' + event.target)
+		event.target.parentElement.parentElement.remove();
+	}
+})
+
+	console.log('card should be appended.')
+}
 
 let trueRandomNumber;
 let allInputs = Array.from(document.getElementsByTagName('input'));
@@ -156,12 +255,6 @@ function generateRandomNum(minRange, maxRange) {
 	console.log(randomNum)
 	return randomNum;
 }
-
-
-// function emptyTheInput(element) {
-// 	element.value = '';
-// }
-
 
 function emptyTheInput(array) {
 	for (let i = 0; i < array.length; i++) {
@@ -198,108 +291,6 @@ function changeContent(input, output, string) {
 	}
 	output.forEach(changeHTML);
 }
-
-
-
-
-
-// function updateAll(query, output, string) {
-//  	let qValue = query.value;
-// 	return changeContent(qValue, output, string);
-// }
-// function changeContent(input, output, string) {
-// 	console.log("input is: " input );
-// 	let changeHTML = element => element.innerHTML = input;
-// 	output.forEach(changeHTML);
-// }
-// updateColorRed(errorInputName, errorInputNumb, ch1NameOutput)
-// updateVisibility(errorInputName);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// let visibilityHidden = (element) => {element.style.visibility = 'hidden'};
-// let visibilityShow = (element) => {element.style.visibility = 'visible'};
-
-
-// //HOFs
-// //modify n arguments including nodeLists --currently changes visibility to hidden
-// function updateVisibility(...inputs) {
-// 	//array of Nodelists
-// 	let visibilityHidden = (element) => {element.style.visibility = 'hidden'};
-// 	return inputs.map(element => element.forEach(visibilityHidden));
-// }
-
-// //modify n arguments including nodeLists --currently changes colors to red
-// // function updateColorRed(...inputs) {
-// // 	//array of Nodelists
-// // 	let changeColor = (element) => {element.style.color = 'blue'}
-// // 	return inputs.map(element => element.forEach(changeColor));
-// // }
-
-// toArray(errorInputName, errorInputNumb, ch1NameOutput)
-
-// function toArray(...inputs) {
-// 	//array of Nodelists
-// 	let convertToArr = (element) => {Array.from(element)}
-// 	let inputArr = inputs.map(convertToArr);
-// 	console.log(inputArr);
-// }
-
-
-
-//change non-forms to forms in HTML
-//convert nodeLists to Arrays and then forEach the new arrays
-//arrow function w/o {} implicitly returns, with {} needs return keyword
-
-
-
-
-
-
-
-
-
-
 
 
 
