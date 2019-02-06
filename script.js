@@ -1,12 +1,8 @@
 /* ==== QUERIES ==== */
-
-
-// All these querySelectors return a static (not live) Array-like object.
-
 /* =Output Section= */
 let outputParent = document.querySelector('.output-section');
-// let outputCard = document.querySelector('.output-card');
 
+/* =Input Section= */
 /* =Range Queries= */
 let minRange = document.querySelector('.min-range');
 let maxRange = document.querySelector('.max-range');
@@ -40,6 +36,38 @@ let btnClear = document.querySelector('.clear-btn');
 let btnX = document.querySelector('.btn-x');
 
 
+
+/* ==== GLOBAL VARIABLES ==== */
+let totalGuesses = 0;
+let trueRandomNumber;
+let allInputs = Array.from(document.getElementsByTagName('input'));
+let currentMinRange = 1;
+let currentMaxRange = 100;
+
+/* ==== ON RUN INVOKE ==== */
+generateRandomNum();
+disableButtons();
+
+btnUpdate.addEventListener('click', function() {
+	checkForNumbers();
+	function checkForNumbers() {
+		if ( (parseInt(minRange.value) < parseInt(maxRange.value)) ) {
+			// (minRange.value.length > 0 && maxRange.value.length > 0) &&
+			currentMinRange = minRange.value;
+			currentMaxRange = maxRange.value;
+			console.log('currentMinRange INFUNC ' + currentMinRange);
+			console.log('currentMaxRange INFUNC ' + currentMaxRange);
+			rangeLow.innerText = minRange.value;
+			rangeHigh.innerText = maxRange.value;
+			trueRandomNumber = generateRandomNum(minRange.value, maxRange.value, null);
+		} else {
+			alert('ALERT: Your maximum value is less than your minimum value!');
+			console.log(minRange.value)
+			console.log(maxRange.value)
+		}
+	}
+});
+
 btnClear.addEventListener('click', function() {
 	clearTheInputs();
 	revertAllOutputs();
@@ -49,7 +77,6 @@ btnClear.addEventListener('click', function() {
 			if (minRange.value.length > 0 || maxRange.value.length > 0 || ch1NameInput.value.length > 0 || ch2NameInput.value.length > 0 || 
 				ch1Guess.value.length > 0 || ch2Guess.value.length > 0) {
 				emptyTheInput(allInputs);
-				// btnClear.classList.remove("btn-active");
 				console.log(trueRandomNumber);
 			} else {
 				console.log('CLEAR INVALID');
@@ -64,32 +91,16 @@ btnReset.addEventListener('click', function() {
 	resetRandomNumber();
 	revertAllOutputs();
 	trueDisableON();
-	//resetRandomNumber needs to return a new random Number;
 	function resetRandomNumber() {
 		return trueRandomNumber = generateRandomNum(minRange, maxRange)
 		console.log(trueRandomNumber);
 	}
 })
 
-btnUpdate.addEventListener('click', function() {
-	checkForNumbers();
-	function checkForNumbers() {
-		if ( (minRange.value.length > 0 && maxRange.value.length > 0) && ( parseInt(minRange.value) < parseInt(maxRange.value) ) ) {
-			rangeLow.innerText = minRange.value;
-			rangeHigh.innerText = maxRange.value;
-			trueRandomNumber = generateRandomNum(minRange.value, maxRange.value, null);
-		} else {
-			alert('ALERT: Your maximum value is less than your minimum value!');
-			console.log(minRange.value)
-			console.log(maxRange.value)
-		}
-	}
-});
-
 btnSubmit.addEventListener('click', function() {
 	checkForNames();
 	checkForNumbers();
-	stayInRangeAlert();
+	stayInRangeAlert(currentMinRange, currentMaxRange);
 	guessCounter();
 	howClose();
 	console.log("total guesses: " + totalGuesses);
@@ -115,13 +126,20 @@ btnSubmit.addEventListener('click', function() {
 			btnClear.className += " btn-active";
 			btnReset.className += " btn-active";
 			trueDisableOFF();
-			console.log('name is valid');
 		}
 	}
 	function guessCounter() {
 	totalGuesses++;
 	}
 });
+
+outputParent.addEventListener('click',function(event) {
+	if (event.target.className === 'btn-x') {
+		console.log('op target: ' + event.target)
+		event.target.parentElement.parentElement.remove();
+	}
+})
+
 
 /*=== TEMPORARILY GLOBAL FUNCTIONS && VARIABLES ====*/
 function trueDisableON() {
@@ -134,16 +152,15 @@ function trueDisableOFF() {
 	btnClear.disabled = false;		
 }
 
-//Alerts if user is guessing outside of min - max range
-function stayInRangeAlert() {
-	if (((parseInt(minRange.value) <= parseInt(ch1Guess.value)) && (parseInt(ch1Guess.value) <= parseInt(maxRange.value))) && 
-		((parseInt(minRange.value) <= parseInt(ch2Guess.value)) && (parseInt(ch2Guess.value) <= parseInt(maxRange.value)))){
-	} else {
+function stayInRangeAlert(Min, Max) {
+	if (((parseInt(minRange.value) <= (parseInt(ch1Guess.value) && parseInt(ch2Guess.value))) && 
+		 (parseInt(maxRange.value) >= (parseInt(ch1Guess.value) && parseInt(ch2Guess.value)))) && 
+		 ( ((parseInt(minRange.value) >= currentMinRange) && (parseInt(maxRange.value)) <= currentMaxRange) )) { } 
+		 	else {
 		alert('ALERT: Your numbers are not within the prescribed range!')
 	}
 }
 
-disableButtons();
 function disableButtons(target) {
 	if (minRange.value.length > 0 || maxRange.value.length > 0 || ch1NameInput.value.length > 0 || ch2NameInput.value.length > 0 || 
 		ch1Guess.value.length > 0 || ch2Guess.value.length > 0) {
@@ -151,7 +168,6 @@ function disableButtons(target) {
 		btnClear.className += " btn-disabled";
 		btnReset.className += " btn-disabled";
 		trueDisableON()
-		console.log('true')
 	}
 }
 
@@ -189,16 +205,6 @@ function howClose() {
 	}
 }
 
-
-outputParent.addEventListener('click',function(event) {
-	if (event.target.className === 'btn-x') {
-		console.log('op target: ' + event.target)
-		event.target.parentElement.parentElement.remove();
-	}
-})
-
-
-//perhaps create an Array. as the condition is met, we push an element onto the array and then the append function appends the last element of the array onto the output section
 
 function appendCard(winner) {
 	console.log(winner);
@@ -238,11 +244,6 @@ function appendCard(winner) {
 })
 }
 
-let totalGuesses = 0;
-let trueRandomNumber;
-let allInputs = Array.from(document.getElementsByTagName('input'));
-
-let globalInterval;
 function generateRandomNum(minRange = 1, maxRange = 100) {
 	minRange = parseInt(rangeLow.innerText);
 	maxRange = parseInt(rangeHigh.innerText);
