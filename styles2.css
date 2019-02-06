@@ -53,7 +53,6 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .output-section {
-	border: 1px solid green;
 	width: 50%;
 	background-color: #D0D2D3;
 }
@@ -169,6 +168,14 @@ input[type=number]::-webkit-outer-spin-button {
 .input:focus {
 	border: 2px solid #F74D9B;
 	outline: none;
+}
+
+.input:focus + .error {
+	visibility: visible;
+}
+
+.error {
+	color: #DD1972;
 }
 
 .sm-input {	
