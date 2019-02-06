@@ -79,7 +79,7 @@ btnUpdate.addEventListener('click', function() {
 			rangeHigh.innerText = maxRange.value;
 			trueRandomNumber = generateRandomNum(minRange.value, maxRange.value);
 		} else {
-			alert('false');
+			alert('ALERT: Your maximum value is less than your minimum value!');
 			console.log(minRange.value)
 			console.log(maxRange.value)
 		}
@@ -136,12 +136,12 @@ function trueDisableOFF() {
 	btnClear.disabled = false;		
 }
 
+//Alerts if user is guessing outside of min - max range
 function stayInRangeAlert() {
 	if (((parseInt(minRange.value) <= parseInt(ch1Guess.value)) && (parseInt(ch1Guess.value) <= parseInt(maxRange.value))) && 
 		((parseInt(minRange.value) <= parseInt(ch2Guess.value)) && (parseInt(ch2Guess.value) <= parseInt(maxRange.value)))){
-		console.log('theyre in between');
 	} else {
-		console.log('theyre not in between');
+		alert('ALERT: Your numbers are not within the prescribed range!')
 	}
 }
 
@@ -149,7 +149,6 @@ disableButtons();
 function disableButtons(target) {
 	if (minRange.value.length > 0 || maxRange.value.length > 0 || ch1NameInput.value.length > 0 || ch2NameInput.value.length > 0 || 
 		ch1Guess.value.length > 0 || ch2Guess.value.length > 0) {
-		console.log('false')
 	} else {
 		btnClear.className += " btn-disabled";
 		btnReset.className += " btn-disabled";
