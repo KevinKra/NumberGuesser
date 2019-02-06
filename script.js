@@ -49,7 +49,6 @@ btnClear.addEventListener('click', function() {
 			if (minRange.value.length > 0 || maxRange.value.length > 0 || ch1NameInput.value.length > 0 || ch2NameInput.value.length > 0 || 
 				ch1Guess.value.length > 0 || ch2Guess.value.length > 0) {
 				emptyTheInput(allInputs);
-				// btnClear.classList.remove("btn-active");
 				console.log(trueRandomNumber);
 			} else {
 				console.log('CLEAR INVALID');
@@ -64,7 +63,6 @@ btnReset.addEventListener('click', function() {
 	resetRandomNumber();
 	revertAllOutputs();
 	trueDisableON();
-	//resetRandomNumber needs to return a new random Number;
 	function resetRandomNumber() {
 		return trueRandomNumber = generateRandomNum(minRange, maxRange)
 		console.log(trueRandomNumber);
@@ -74,7 +72,8 @@ btnReset.addEventListener('click', function() {
 btnUpdate.addEventListener('click', function() {
 	checkForNumbers();
 	function checkForNumbers() {
-		if ( (minRange.value.length > 0 && maxRange.value.length > 0) && ( parseInt(minRange.value) < parseInt(maxRange.value) ) ) {
+		if ( (parseInt(minRange.value) < parseInt(maxRange.value)) ) {
+			// (minRange.value.length > 0 && maxRange.value.length > 0) &&
 			rangeLow.innerText = minRange.value;
 			rangeHigh.innerText = maxRange.value;
 			trueRandomNumber = generateRandomNum(minRange.value, maxRange.value, null);
@@ -134,11 +133,10 @@ function trueDisableOFF() {
 	btnClear.disabled = false;		
 }
 
-//Alerts if user is guessing outside of min - max range
 function stayInRangeAlert() {
-	if (((parseInt(minRange.value) <= parseInt(ch1Guess.value)) && (parseInt(ch1Guess.value) <= parseInt(maxRange.value))) && 
-		((parseInt(minRange.value) <= parseInt(ch2Guess.value)) && (parseInt(ch2Guess.value) <= parseInt(maxRange.value)))){
-	} else {
+	if ((parseInt(minRange.value) <= (parseInt(ch1Guess.value) && parseInt(ch2Guess.value))) && 
+		 (parseInt(maxRange.value) >= (parseInt(ch1Guess.value) && parseInt(ch2Guess.value)))) { } 
+		 	else {
 		alert('ALERT: Your numbers are not within the prescribed range!')
 	}
 }
@@ -242,7 +240,7 @@ let totalGuesses = 0;
 let trueRandomNumber;
 let allInputs = Array.from(document.getElementsByTagName('input'));
 
-let globalInterval;
+generateRandomNum();
 function generateRandomNum(minRange = 1, maxRange = 100) {
 	minRange = parseInt(rangeLow.innerText);
 	maxRange = parseInt(rangeHigh.innerText);
