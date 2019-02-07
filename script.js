@@ -158,6 +158,7 @@ function stayInRangeAlert(Min, Max) {
 		 ( ((parseInt(minRange.value) >= currentMinRange) && (parseInt(maxRange.value)) <= currentMaxRange) )) { } 
 		 	else {
 		alert('ALERT: Your numbers are not within the prescribed range!')
+		console.log('Alert currentMinRange: ' + currentMinRange);
 	}
 }
 
