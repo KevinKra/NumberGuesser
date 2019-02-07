@@ -9,6 +9,7 @@ html {
 
 body {
 /*	border: 1px solid red;*/
+	width: 100%;
 	padding: 0;
 	margin: 0;
 	font-family: "Open Sans", sans-serif;
@@ -43,7 +44,6 @@ input[type=number]::-webkit-outer-spin-button {
 
 .header-section {
 	background-color: #404041;
-	height: 120px;
 }
 
 .input-section {
@@ -210,7 +210,7 @@ input[type=number]::-webkit-outer-spin-button {
 	background-color: lightgrey;
 	border-style: none;
 	display: inline;
-	height: 200px;
+	height: 190px;
 	margin: 0;
 	position: absolute;
 	width: 2px;
@@ -242,7 +242,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .header-article hr {
 	display: inline-block;
-	margin:5px 5px;
+	margin: 5px 5px;
 	width: 19%;
 }
 
@@ -253,6 +253,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 /*====== RANGE LAYOUT ======*/
 .input-container .sm-input {
+	margin-top: 5%;
 	margin-right: .6rem;
 }
 
@@ -304,8 +305,8 @@ input[type=number]::-webkit-outer-spin-button {
 	font-weight: 800;
 }
 
-#guess-cont {
-	height: 225px;
+.bottom-section {
+	height: 210px;
 }
 
 .chall-latest {
@@ -323,11 +324,6 @@ input[type=number]::-webkit-outer-spin-button {
 .output-card header, footer {
 	display: flex;
 	justify-content: space-evenly;
-}
-
-.output-center {
-	display: relative;
-	margin: 1rem 0;
 }
 
 .output-card article {
@@ -357,9 +353,9 @@ input[type=number]::-webkit-outer-spin-button {
 	width: 58%;
 }
 
-@media screen and (max-width: 1130px) {
-	body {
-	  border: 1px solid red;
+@media screen and (max-width: 1230px) {
+	.output-section {
+		margin: 0 auto;
 	}
 
 	.challenger-btns {
@@ -367,22 +363,109 @@ input[type=number]::-webkit-outer-spin-button {
 		flex-direction: column;
 		align-items: center;
 		justify-content: flex-start;
-		border: 1px solid red;
+		/*border: 1px solid red;*/
 		min-width: 100%;
 	}
 
 	.challenger-btns > .btn {
-		max-width: 90%;
-		min-width: 70%;
+		width: 100%;
 		margin: 10px 0;
 		padding: 15px 0 30px 0;
 	}
 
+	.input-container {
+		display: flex;
+		flex-direction: column;
+		/*border: 1px solid red;*/
+	}
+
+	.input-container .sm-input, .md-input {
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+
+	.bottom-section {
+		height: auto;
+	}
+
+	.vertical-line {
+		background-color: lightgrey;
+		border-style: none;
+		display: inline;
+		height: 2px;
+		margin: 0;
+		position: absolute;
+		width: 190px;
+	}
+
+	.challenger-rules {
+		display: flex;
+		flex-direction: column;
+		height: 400px;
+	}
+
+	.chall-latest {
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+	}
+
+
 }
 
-@media screen and (max-width: 400px) {
-	body {
-		border: 1px solid green;
+@media screen and (max-width: 650px) {
+
+	.input-section {
+		border-right: 0;
+		border-bottom: 2px solid #6E6E6E;
+	}
+
+	/*====== HEADER LAYOUT ======*/
+.header-article {
+	margin: 0 auto;
+	text-align: center;
+	width: auto;
+}
+
+.header-article > h1 {
+	color: #DD1972;
+	font-size: 35px;
+	letter-spacing: 0px;
+	margin: 0;
+	padding: 0;
+}
+
+.header-article > p {
+	color: #FFF;
+	display: inline;
+	font-size: 16px;
+	font-weight: 100;
+	margin: 0;
+}
+
+.header-article hr {
+	display: inline-block;
+	margin:5px 5px;
+	width: 3%;
+}
+
+.header-span {
+	font-weight: 100;
+}
+
+	.flex-document {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.input-section {
+		width: 100%;
+	}
+
+	.output-section {
+		min-height: 500px;
+		width: 100%;
 	}
 }
 
