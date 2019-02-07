@@ -40,6 +40,7 @@ input[type=number]::-webkit-outer-spin-button {
 /*====== GLOBAL LAYOUT ======*/
 .flex-document {
 	display: flex;
+	height: 817px;
 }
 
 .header-section {
@@ -55,6 +56,7 @@ input[type=number]::-webkit-outer-spin-button {
 .output-section {
 	width: 50%;
 	background-color: #D0D2D3;
+	overflow-y: scroll;
 }
 
 .input-section, .output-section {
@@ -252,11 +254,6 @@ input[type=number]::-webkit-outer-spin-button {
 
 
 /*====== RANGE LAYOUT ======*/
-.input-container .sm-input {
-	margin-top: 5%;
-	margin-right: .6rem;
-}
-
 .range-box > .content-container:first-child p {
 	margin: 0 0 1rem 0;
 	padding: 0;
@@ -354,8 +351,13 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 @media screen and (max-width: 1230px) {
+	.flex-document {
+		height: auto;
+	}
+
 	.output-section {
 		margin: 0 auto;
+		overflow-y: auto;
 	}
 
 	.challenger-btns {
@@ -410,8 +412,6 @@ input[type=number]::-webkit-outer-spin-button {
 		display: flex;
 		flex-direction: column;
 	}
-
-
 }
 
 @media screen and (max-width: 650px) {
